@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DW Propensity Score Notes</title>
+<style>
+/* Plain single-theme note: white page, black text, one reading column */
+:root { --bg: #ffffff; --fg: #000000; --muted: #444444; --rule: #bbbbbb; color-scheme: light; }
+body { background: var(--bg); color: var(--fg); font-family: Georgia, "Times New Roman", serif; font-size: 16px; line-height: 1.6; }
+.wrap { max-width: 760px; margin: 0 auto; padding-inline: 16px; padding-block: 32px 56px; }
+h1 { font-size: 26px; margin: 0 0 4px; font-weight: bold; text-wrap: balance; }
+.sub { margin: 0 0 28px; color: var(--muted); }
+h2 { font-size: 20px; margin: 32px 0 10px; font-weight: bold; }
+h2 .src { font-weight: normal; font-size: 15px; color: var(--muted); }
+ul { margin: 0 0 14px; padding-left: 22px; }
+li { margin: 4px 0; }
+p { margin: 0 0 14px; }
+code { font-family: Menlo, Consolas, monospace; font-size: .9em; }
+.table-box { overflow-x: auto; margin: 16px 0 6px; }
+table { border-collapse: collapse; width: 100%; min-width: 540px; font-variant-numeric: tabular-nums; }
+th, td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--rule); }
+th:first-child, td:first-child { text-align: left; }
+thead th { border-top: 2px solid var(--fg); border-bottom: 1px solid var(--fg); font-weight: bold; }
+tbody tr:last-child td { border-bottom: 2px solid var(--fg); }
+tr.group td { font-style: italic; border-bottom: 0; padding-top: 12px; }
+td.hit { font-weight: bold; }
+.note { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+.eq { font-style: italic; }
+thead tr.desc th { font-weight: normal; font-size: 13px; color: var(--muted); border-top: 0; text-align: right; vertical-align: top; white-space: normal; }
+thead tr.desc th:first-child { text-align: left; }
+thead tr.top th { border-bottom: 0; }
+table.wide { min-width: 860px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>DW Propensity Score Notes</h1>
+    <p class="sub">What the Dehejia–Wahba (1999, 2002) propensity scores must look like to reproduce the published CPS numbers.</p>
+  </header>
+
+  <section>
+    <h2>1. The 1999 score <span class="src">JASA, Table 3 footnote (g)</span></h2>
+    <ul>
+      <li>If we estimate the score exactly as footnote (g) lists it, two numbers in the Figure 2 caption are far off:
+        <ul>
+          <li>discarded CPS units: 12,136 vs. 12,611</li>
+          <li>CPS units in the first bin: 3,454 vs. 2,969</li>
+        </ul>
+      </li>
+      <li>The counts with <span class="eq">ê</span> &gt; 0.8 are close either way: 36 treated / 8 comparison vs. 35 / 7.</li>
+      <li>If we drop <code>nodegree</code>, the caption is matched exactly: 12,611 discarded, 2,969 in the first bin, 7 comparison units above 0.8. Only the treated count above 0.8 is off by one (34 vs. 35).</li>
+      <li>The same score also reproduces the Table 3 matching ATT exactly: 1,582.</li>
+      <li>Two numbers are not matched by either spec:
+        <ul>
+          <li>Table 3, column (6) observations: paper 4,117; footnote (g) 4,041; without <code>nodegree</code> 3,566.</li>
+          <li>Table 4, MCPS-1 observations: paper 119; footnote (g) 106; without <code>nodegree</code> 112.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="table-box">
+      <table>
+        <thead>
+          <tr><th>Statistic</th><th>Paper (1999)</th><th>Footnote (g) as written</th><th>Without <code>nodegree</code></th></tr>
+        </thead>
+        <tbody>
+          <tr class="group"><td colspan="4">Figure 2 caption</td></tr>
+          <tr><td>Discarded CPS units (ê below treated minimum)</td><td>12,611</td><td>12,136</td><td class="hit">12,611</td></tr>
+          <tr><td>CPS units in the first bin [0, 0.05)</td><td>2,969</td><td>3,454</td><td class="hit">2,969</td></tr>
+          <tr><td>Treated units with ê &gt; 0.8</td><td>35</td><td>36</td><td>34</td></tr>
+          <tr><td>Comparison units with ê &gt; 0.8</td><td>7</td><td>8</td><td class="hit">7</td></tr>
+          <tr class="group"><td colspan="4">Table 3, CPS-1 row</td></tr>
+          <tr><td>(7) Matching ATT, unadjusted</td><td>1,582</td><td>952</td><td class="hit">1,582</td></tr>
+          <tr><td>(6) Observations</td><td>4,117</td><td>4,041</td><td>3,566</td></tr>
+          <tr class="group"><td colspan="4">Table 4</td></tr>
+          <tr><td>MCPS-1 observations (distinct matched controls)</td><td>119</td><td>106</td><td>112</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Bold = exact match with the paper.</p>
+
+    <p>Decision: report both specs, and use the spec without <code>nodegree</code> as the main one.</p>
+  </section>
+
+  <section>
+    <h2>2. No-constant logit <span class="src">ReStat 2002</span></h2>
+    <ul>
+      <li>A logit with no constant, with U74 / U75 coded as “1 if positive earnings” (see section 3), reproduces the 2002 CPS results exactly:
+        <ul>
+          <li>Figure 1 caption: 11,168 discarded, 4,398 in the first bin</li>
+          <li>Table 2, nearest-neighbor matching: 119 observations</li>
+          <li>Table 2, caliper matching: 325 / 1,043 / 1,731 observations</li>
+          <li>Table 2 treatment effects: 1,605 / 1,559 (without replacement), 1,360 (nearest neighbor), 1,119 / 1,158 / 1,122 (caliper)</li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="table-box">
+      <table>
+        <thead>
+          <tr><th>Statistic</th><th>Paper (2002)</th><th>With constant</th><th>No constant</th></tr>
+        </thead>
+        <tbody>
+          <tr class="group"><td colspan="4">Figure 1 caption</td></tr>
+          <tr><td>Discarded CPS units (ê below treated minimum)</td><td>11,168</td><td>12,136</td><td class="hit">11,168</td></tr>
+          <tr><td>CPS units in the first bin [0, 0.05)</td><td>4,398</td><td>3,454</td><td class="hit">4,398</td></tr>
+          <tr class="group"><td colspan="4">Table 2, number of observations</td></tr>
+          <tr><td>Nearest neighbor</td><td>119</td><td>106</td><td class="hit">119</td></tr>
+          <tr><td>Caliper, δ = 0.00001</td><td>325</td><td>242</td><td class="hit">325</td></tr>
+          <tr><td>Caliper, δ = 0.00005</td><td>1,043</td><td>733</td><td class="hit">1,043</td></tr>
+          <tr><td>Caliper, δ = 0.0001</td><td>1,731</td><td>1,221</td><td class="hit">1,731</td></tr>
+          <tr class="group"><td colspan="4">Table 2, treatment effect (difference in means)</td></tr>
+          <tr><td>Without replacement, low to high</td><td>1,605</td><td>1,086</td><td class="hit">1,605</td></tr>
+          <tr><td>Without replacement, high to low</td><td>1,559</td><td>1,055</td><td class="hit">1,559</td></tr>
+          <tr><td>Nearest neighbor</td><td>1,360</td><td>952</td><td class="hit">1,360</td></tr>
+          <tr><td>Caliper, δ = 0.00001</td><td>1,119</td><td>1,071</td><td class="hit">1,119</td></tr>
+          <tr><td>Caliper, δ = 0.00005</td><td>1,158</td><td>1,098</td><td class="hit">1,158</td></tr>
+          <tr><td>Caliper, δ = 0.0001</td><td>1,122</td><td>1,107</td><td class="hit">1,122</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Bold = exact match with the paper (after rounding). Both columns use the Table 2 note (A) regressors. With a constant, the U74 / U75 coding does not change the score. The random-order row is left out because its result depends on the random order.</p>
+
+    <ul>
+      <li>With a constant, none of these numbers are reproduced.</li>
+      <li>DW (2002) never says it drops the constant. The appendix writes the model as <span class="eq">e<sup>λh(X)</sup> / (1 + e<sup>λh(X)</sup>)</span> with no explicit intercept, but that alone is not real evidence.</li>
+      <li>Smith and Todd (2005, p. 328) confirm it directly: “although DW (2002) did not include a constant term in the logistic model, we do.” So the no-constant logit is documented in the literature, not only inferred from our replication.</li>
+      <li>Dropping the constant is equivalent to restricting the intercept to <span class="eq">β<sub>74</sub> + β<sub>75</sub></span> in the model that uses the zero-earnings coding. A likelihood ratio test rejects this restriction strongly: LR ≈ 80, df = 1.</li>
+      <li>So the no-constant logit is what DW (2002) did, but it is not a justified modeling choice. We use it only to reproduce the 2002 numbers.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>3. U74 / U75 coding <span class="src">ReStat 2002</span></h2>
+    <ul>
+      <li>The paper defines U74 (U75) as “1 if unemployed in 1974 (1975), 0 otherwise.”</li>
+      <li>The data have no employment status variable, so “unemployed” can only mean zero earnings.</li>
+      <li>But the means in Table 2 (CPS) match the share with <em>positive</em> earnings: 0.29 / 0.40 for NSW and 0.88 / 0.89 for the full CPS. So in Table 2 the variable is really “1 if positive earnings in 1974 (1975), 0 otherwise.”</li>
+      <li>This coding changes the score only when the logit has no constant. With a constant, both codings give the same score. So it does not affect the 1999 Table 3 replication.</li>
+    </ul>
+  </section>
+
+
+  <section>
+    <h2>4. Applying the 2002 score to 1999 Table 3 <span class="src">CPS-1 row</span></h2>
+    <ul>
+      <li>Question: if we use the score that reproduces the 2002 paper, do we get the 1999 Table 3 estimates?</li>
+      <li>Answer: no. The 2002 score moves every score-based column further from the 1999 paper than the 1999 score does.</li>
+    </ul>
+
+    <div class="table-box">
+      <table class="wide">
+        <thead>
+          <tr class="top"><th>Score</th><th>(3)</th><th>(4)</th><th>(5)</th><th>(6)</th><th>(7)</th><th>(8)</th></tr>
+          <tr class="desc"><th>Which propensity score is used</th><th>Regression of RE78 on treat, ê and ê², on the common-support sample</th><th>Stratification: within-block mean difference, weighted by treated count</th><th>Stratification: within-block regression with footnote (a) covariates, weighted by treated count</th><th>Observations: all treated + CPS units with ê in [treated min, treated max]</th><th>Nearest-neighbor matching with replacement: mean of Y<sub>i</sub> − Y<sub>j(i)</sub></th><th>Weighted regression on the matched sample with footnote (a) covariates; control weight = times matched</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2002 score (no constant, positive-earnings coding)</td><td>1,019</td><td>1,521</td><td>1,447</td><td>5,009</td><td>1,360</td><td>1,400</td></tr>
+          <tr><td>1999 score (constant, without <code>nodegree</code>)</td><td>1,109</td><td>1,833</td><td>1,877</td><td>3,566</td><td class="hit">1,582</td><td>1,565</td></tr>
+          <tr><td>Paper (1999, Table 3)</td><td>1,117</td><td>1,713</td><td>1,774</td><td>4,117</td><td>1,582</td><td>1,616</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Bold = exact match with the paper. Columns (1) and (2) do not use the score, so they are the same for every score and are left out. Stratification blocks follow the 2002 appendix rule: start from five equal-width blocks on [0, 1] and split a block in half while the mean score differs between treated and controls (|t| &gt; 1.96).</p>
+
+    <ul>
+      <li>The two papers already report different answers for the same estimator on the same data. Only the propensity score differs.</li>
+    </ul>
+
+    <div class="table-box">
+      <table class="wide">
+        <thead>
+          <tr class="top"><th>Paper</th><th>Where</th><th>Data</th><th>Estimator</th><th>ATT</th></tr>
+          <tr class="desc"><th>Source of the number</th><th>Table and row in the paper</th><th>Treated and comparison samples</th><th>Matching method and outcome contrast</th><th>Reported treatment effect on RE78 (US$)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>DW (1999), JASA</td><td>Table 3, CPS-1, column (7)</td><td>185 NSW treated, 15,992 CPS</td><td>Nearest neighbor with replacement, difference in means</td><td>1,582</td></tr>
+          <tr><td>DW (2002), ReStat</td><td>Table 2, nearest-neighbor row</td><td>185 NSW treated, 15,992 CPS</td><td>Nearest neighbor with replacement, difference in means</td><td>1,360</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul>
+      <li>So a score that reproduces the 2002 paper must give 1,360 in column (7), not 1,582. A score that fits 2002 cannot fit 1999 on this data.</li>
+      <li>Matching the mean score alone also does not pin down the spec: many specs with two or three terms dropped give a treated mean near 0.37, and their ATTs differ.</li>
+      <li>For 1999 Table 3 we therefore use the spec found from the 1999 paper's own evidence (Figure 2 caption and column (7) = 1,582).</li>
+      <li>This gap is itself a result: the authors' own two papers show how sensitive the matching ATT is to the score specification, which is the point Smith and Todd (2005) make.</li>
+    </ul>
+    <p>Conclusion: the 1999 and 2002 papers used different propensity scores. For 1999 Table 3, we use the logit with a constant and without <code>nodegree</code>.</p>
+  </section>
+</div>
+</body>
+</html>

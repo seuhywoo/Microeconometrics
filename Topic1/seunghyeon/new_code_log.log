@@ -1,0 +1,1418 @@
+-------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/seunghyeon/myproject/Microeconometrics/Topic1/seunghyeon/new_code_log.log
+  log type:  text
+ opened on:  28 Sep 2026, 17:55:23
+
+. 
+. clear all
+
+. set more off
+
+. 
+. global path "/Users/seunghyeon/myproject/Microeconometrics/Topic1/seunghyeon"
+
+. cd "$path"
+/Users/seunghyeon/myproject/Microeconometrics/Topic1/seunghyeon
+
+. 
+. 
+. * ==========================================================
+. * STEP 0. Experimental benchmark
+. *   [과제 PDF Reproduce 1: "The published value is $1,794"]
+. * ==========================================================
+. 
+. use "nsw_dw.dta", clear
+
+. tab treat
+
+      treat |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        260       58.43       58.43
+          1 |        185       41.57      100.00
+------------+-----------------------------------
+      Total |        445      100.00
+
+. * treat==1: 185, treat==0: 260 이어야 DW 표본이다 (LaLonde 표본은 297/425).
+. regress re78 treat
+
+      Source |       SS           df       MS      Number of obs   =       445
+-------------+----------------------------------   F(1, 443)       =      8.04
+       Model |   348013183         1   348013183   Prob > F        =    0.0048
+    Residual |  1.9178e+10       443  43290369.3   R-squared       =    0.0178
+-------------+----------------------------------   Adj R-squared   =    0.0156
+       Total |  1.9526e+10       444  43976681.9   Root MSE        =    6579.5
+
+------------------------------------------------------------------------------
+        re78 | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       treat |   1794.342   632.8534     2.84   0.005     550.5745     3038.11
+       _cons |   4554.801   408.0459    11.16   0.000     3752.855    5356.747
+------------------------------------------------------------------------------
+
+. scalar bench_dw = _b[treat]
+
+. di as txt "Experimental benchmark, DW sample = " as res %9.1f bench_dw as txt "   [paper: 1,794]"
+Experimental benchmark, DW sample =    1794.3   [paper: 1,794]
+
+. 
+. 
+. * ==========================================================
+. * STEP 1. 표본 구성: NSW treated (185) + CPS-1 (15,992)
+. * ==========================================================
+. 
+. use "nsw_dw.dta", clear
+
+. keep if treat == 1
+(260 observations deleted)
+
+. append using "cps_controls.dta"
+
+. replace treat = 0 if missing(treat)
+(0 real changes made)
+
+. 
+. gen long id = _n
+
+. * 이 순서(treated 먼저, 그다음 CPS 원 파일 순서)가 매칭 동점 처리의
+. * 기준이 된다: 동점이면 id가 가장 작은 control을 고른다.
+. 
+. gen age2      = age^2
+
+. gen age3      = age^3
+
+. gen educ2     = education^2
+
+. gen educ_re74 = education*re74
+
+. 
+. gen u74 = (re74 == 0)
+
+. gen u75 = (re75 == 0)
+
+. * 1999 코드 방식: 1 = 소득 0 (unemployed)
+. 
+. gen e74 = 1 - u74
+
+. gen e75 = 1 - u75
+
+. * 2002 방식: Table 2의 U74/U75 평균이 NSW 0.29/0.40, CPS 0.88/0.89인데,
+. * 이건 "소득 > 0" 비율과 일치한다 (소득 0 비율은 NSW 0.71/0.60).
+. * 즉 2002 논문의 U74/U75는 실제로 1 = positive earnings로 코딩되어 있다.
+. * constant가 있는 logit에서는 u와 e 코딩이 score에 아무 영향이 없지만,
+. * constant가 없으면 달라진다 (아래 STEP 2 참고).
+. 
+. tab treat
+
+      treat |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     15,992       98.86       98.86
+          1 |        185        1.14      100.00
+------------+-----------------------------------
+      Total |     16,177      100.00
+
+. tabstat u74 u75 e74 e75, by(treat) stat(mean) format(%5.2f)
+
+Summary statistics: Mean
+Group variable: treat 
+
+   treat |       u74       u75       e74       e75
+---------+----------------------------------------
+       0 |      0.12      0.11      0.88      0.89
+       1 |      0.71      0.60      0.29      0.40
+---------+----------------------------------------
+   Total |      0.13      0.11      0.87      0.89
+--------------------------------------------------
+
+. * -> e74/e75 평균이 2002 Table 2의 U74/U75 열과 같아야 한다.
+. 
+. sort id
+
+. 
+. 
+. * ==========================================================
+. * STEP 2. 세 가지 propensity score
+. * ==========================================================
+. 
+. * (a) DW 1999 footnote (g)를 적힌 그대로 (my code.do의 ps와 동일)
+. global Xg  "age age2 age3 education educ2 married nodegree black hispanic re74 re75 u74 u75 educ_re74"
+
+. logit treat $Xg
+
+Iteration 0:  Log likelihood = -1011.0713  
+Iteration 1:  Log likelihood = -612.55814  
+Iteration 2:  Log likelihood = -429.05652  
+Iteration 3:  Log likelihood = -406.25926  
+Iteration 4:  Log likelihood = -404.18813  
+Iteration 5:  Log likelihood = -404.15991  
+Iteration 6:  Log likelihood = -404.15991  
+
+Logistic regression                                    Number of obs =  16,177
+                                                       LR chi2(14)   = 1213.82
+                                                       Prob > chi2   =  0.0000
+Log likelihood = -404.15991                            Pseudo R2     =  0.6003
+
+------------------------------------------------------------------------------
+       treat | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         age |   2.425229   .3500651     6.93   0.000     1.739114    3.111344
+        age2 |  -.0672395   .0111308    -6.04   0.000    -.0890555   -.0454234
+        age3 |   .0005685   .0001113     5.11   0.000     .0003505    .0007866
+   education |   .9247847   .2500694     3.70   0.000     .4346576    1.414912
+       educ2 |  -.0572021   .0136202    -4.20   0.000    -.0838972    -.030507
+     married |  -1.556471   .2517687    -6.18   0.000    -2.049929   -1.063013
+    nodegree |   .9270591   .3254621     2.85   0.004     .2891651    1.564953
+       black |   3.850668   .2662868    14.46   0.000     3.328755     4.37258
+    hispanic |   1.673885   .4099129     4.08   0.000     .8704704      2.4773
+        re74 |  -.0002203   .0001086    -2.03   0.043    -.0004332   -7.40e-06
+        re75 |  -.0001969   .0000378    -5.21   0.000     -.000271   -.0001228
+         u74 |   1.749522   .2897311     6.04   0.000      1.18166    2.317385
+         u75 |     .00944    .257531     0.04   0.971    -.4953114    .5141915
+   educ_re74 |   .0000222   9.08e-06     2.45   0.014     4.43e-06      .00004
+       _cons |  -35.22098   3.797922    -9.27   0.000    -42.66477   -27.77719
+------------------------------------------------------------------------------
+Note: 3 failures and 0 successes completely determined.
+
+. predict double ps_g, pr
+
+. 
+. * (b) 1999: footnote (g)에서 nodegree 제외
+. *     -> 1999 Figure 2 캡션(12,611 / 2,969 / C>.8 = 7)과 일치
+. global X99 "age age2 age3 education educ2 married black hispanic re74 re75 u74 u75 educ_re74"
+
+. logit treat $X99
+
+Iteration 0:  Log likelihood = -1011.0713  
+Iteration 1:  Log likelihood = -621.79703  
+Iteration 2:  Log likelihood = -436.16089  
+Iteration 3:  Log likelihood = -410.34747  
+Iteration 4:  Log likelihood = -408.17403  
+Iteration 5:  Log likelihood = -408.15449  
+Iteration 6:  Log likelihood = -408.15448  
+
+Logistic regression                                    Number of obs =  16,177
+                                                       LR chi2(13)   = 1205.83
+                                                       Prob > chi2   =  0.0000
+Log likelihood = -408.15448                            Pseudo R2     =  0.5963
+
+------------------------------------------------------------------------------
+       treat | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         age |   2.318707   .3463015     6.70   0.000     1.639969    2.997446
+        age2 |  -.0641247   .0110261    -5.82   0.000    -.0857356   -.0425139
+        age3 |   .0005392   .0001104     4.88   0.000     .0003228    .0007556
+   education |   1.090728   .2674571     4.08   0.000     .5665214    1.614934
+       educ2 |  -.0734201   .0140869    -5.21   0.000      -.10103   -.0458103
+     married |  -1.540093   .2490357    -6.18   0.000    -2.028194   -1.051992
+       black |    3.87574    .265595    14.59   0.000     3.355184    4.396297
+    hispanic |   1.716341   .4090055     4.20   0.000     .9147046    2.517977
+        re74 |   -.000224   .0001169    -1.92   0.055    -.0004531    5.15e-06
+        re75 |  -.0001947   .0000377    -5.17   0.000    -.0002686   -.0001208
+         u74 |   1.793334   .2890012     6.21   0.000     1.226902    2.359766
+         u75 |  -.0162767   .2556377    -0.06   0.949    -.5173174     .484764
+   educ_re74 |   .0000223   9.90e-06     2.25   0.024     2.88e-06    .0000417
+       _cons |  -33.42473   3.756793    -8.90   0.000    -40.78791   -26.06155
+------------------------------------------------------------------------------
+Note: 11 failures and 0 successes completely determined.
+
+. predict double ps_99, pr
+
+. 
+. * (c) 2002: Table 2 note (A)의 14개 항, U74/U75 = positive earnings,
+. *     constant 없음 -> 2002 Figure 1 캡션(11,168 / 4,398)과 일치
+. global X02 "age age2 age3 education educ2 married nodegree black hispanic re74 re75 e74 e75 educ_re74"
+
+. logit treat $X02, noconstant
+
+Iteration 0:  Log likelihood = -11213.042  
+Iteration 1:  Log likelihood = -841.12197  
+Iteration 2:  Log likelihood = -516.48334  
+Iteration 3:  Log likelihood = -461.68735  
+Iteration 4:  Log likelihood =  -445.5406  
+Iteration 5:  Log likelihood = -444.37967  
+Iteration 6:  Log likelihood = -444.37018  
+Iteration 7:  Log likelihood = -444.37018  
+
+Logistic regression                                     Number of obs = 16,177
+                                                        Wald chi2(14) = 872.36
+Log likelihood = -444.37018                             Prob > chi2   = 0.0000
+
+------------------------------------------------------------------------------
+       treat | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         age |  -.8091803   .1216316    -6.65   0.000    -1.047574   -.5707868
+        age2 |   .0389026   .0053381     7.29   0.000     .0284401    .0493651
+        age3 |  -.0005311    .000072    -7.38   0.000    -.0006721     -.00039
+   education |    .402022   .1748681     2.30   0.022     .0592869    .7447571
+       educ2 |  -.0311357   .0099518    -3.13   0.002    -.0506408   -.0116306
+     married |  -1.405245   .2535938    -5.54   0.000     -1.90228   -.9082106
+    nodegree |   .3930826    .305079     1.29   0.198    -.2048612    .9910264
+       black |   3.925765   .2536358    15.48   0.000     3.428648    4.422882
+    hispanic |   1.577816   .3924607     4.02   0.000     .8086073    2.347025
+        re74 |  -.0001283   .0000918    -1.40   0.162    -.0003082    .0000516
+        re75 |  -.0001913   .0000366    -5.23   0.000     -.000263   -.0001195
+         e74 |  -1.509089   .2716298    -5.56   0.000    -2.041473    -.976704
+         e75 |  -.1801489   .2416079    -0.75   0.456    -.6536917    .2933939
+   educ_re74 |   .0000151   7.41e-06     2.04   0.041     5.95e-07    .0000296
+------------------------------------------------------------------------------
+Note: 546 failures and 0 successes completely determined.
+
+. predict double ps_02, pr
+
+. * 참고: constant가 없으면 sum_i e-hat_i = N1 성질이 성립하지 않는다.
+. 
+. 
+. * ==========================================================
+. * STEP 3. Figure 캡션 숫자와 비교
+. *   discarded = treated 최소 score보다 작은 CPS 수
+. *   bin1      = 버리고 남은 CPS 중 score가 [0, 0.05)인 수
+. * ==========================================================
+. 
+. capture program drop ps_diag
+
+. program define ps_diag
+  1.     args v lab
+  2.     quietly {
+  3.         sum `v' if treat==1
+  4.         scalar _tmin = r(min)
+  5.         scalar _mT   = r(mean)
+  6.         sum `v' if treat==0
+  7.         scalar _mC   = r(mean)
+  8.         count if treat==0 & `v' <  _tmin
+  9.         scalar _disc = r(N)
+ 10.         count if treat==0 & `v' >= _tmin & `v' < 0.05
+ 11.         scalar _bin1 = r(N)
+ 12.         count if treat==1 & `v' > 0.8
+ 13.         scalar _t8   = r(N)
+ 14.         count if treat==0 & `v' > 0.8
+ 15.         scalar _c8   = r(N)
+ 16.     }
+ 17.     di as txt %-24s "`lab'" as res %8.4f _mT %8.4f _mC %8.0f _disc %7.0f _bin1 %6.0f _t8 %6.0f _c8
+ 18. end
+
+. 
+. di _n as txt "{hline 70}"
+
+----------------------------------------------------------------------
+
+. di as txt %-24s "score" %8s "mean T" %8s "mean C" %8s "disc" %7s "bin1" %6s "T>.8" %6s "C>.8"
+score                     mean T  mean C    disc   bin1  T>.8  C>.8
+
+. di as txt "{hline 70}"
+----------------------------------------------------------------------
+
+. ps_diag ps_g  "(a) 1999 fn(g) as written"
+(a) 1999 fn(g) as written  0.4254  0.0066   12136   3454    36     8
+
+. ps_diag ps_99 "(b) 1999, no nodegree"
+(b) 1999, no nodegree     0.4171  0.0067   12611   2969    34     7
+
+. di as txt %-24s "    paper 1999 Fig 2" %8s "" %8s "" %8s "12611" %7s "2969" %6s "35" %6s "7"
+    paper 1999 Fig 2                       12611   2969    35     7
+
+. ps_diag ps_02 "(c) 2002 spec"
+(c) 2002 spec             0.3661  0.0075   11168   4398    11     3
+
+. di as txt %-24s "    paper 2002 Fig 1" %8s "0.37" %8s "0.01" %8s "11168" %7s "4398" %6s "" %6s ""
+    paper 2002 Fig 1        0.37    0.01   11168   4398            
+
+. di as txt "{hline 70}"
+----------------------------------------------------------------------
+
+. 
+. 
+. * ==========================================================
+. * STEP 4. DW 2002 Table 2 (CPS) 재현 — 매칭 (Mata)
+. *
+. *   Without replacement: treated를 정해진 순서(random / low-to-high /
+. *     high-to-low)로 처리하며, 아직 안 쓰인 control 중 가장 가까운 것 1개.
+. *   Nearest neighbor (with replacement): 가장 가까운 control 1개.
+. *     동점이면 id가 가장 작은 것 하나만 쓴다.
+. *   Caliper: |score 차이| <= delta인 control 전부. 하나도 없으면
+. *     nearest neighbor 1개로 대체 (2002 footnote 10).
+. *
+. *   No. of Obs  = 매칭에 쓰인 서로 다른(unique) control 수
+. *   Mean score  = (1/N1) sum_i (1/|J_i|) sum_{j in J_i} e_j  (treated 가중)
+. *   TE          = (1/N1) sum_i ( Y_i - (1/|J_i|) sum_{j in J_i} Y_j )
+. * ==========================================================
+. 
+. mata:
+------------------------------------------------- mata (type end to exit) -----------------------------------------
+: mata clear
+
+: 
+: void dw_row(string scalar lab, real scalar n, real scalar mps, real scalar te,
+>             string scalar pn, string scalar pm, string scalar pte)
+> {
+>     printf("%-22s %7.0f %8.4f %9.1f    | %6s %5s %6s\n", lab, n, mps, te, pn, pm, pte)
+> }
+
+: 
+: void dw_table2(string scalar psv, real scalar seed)
+> {
+>     D  = st_data(., "treat")
+>     P  = st_data(., psv)
+>     Y  = st_data(., "re78")
+>     t  = select(P, D:==1)
+>     c  = select(P, D:==0)
+>     yt = select(Y, D:==1)
+>     yc = select(Y, D:==0)
+>     N1 = rows(t)
+>     N0 = rows(c)
+>     idx = .
+>     w   = .
+> 
+>     printf("\n{hline 76}\n")
+>     printf("DW 2002 Table 2 (CPS), score = %s\n", psv)
+>     printf("%-22s %7s %8s %9s    | %6s %5s %6s\n", "", "obs", "mean ps", "TE", "paper:", "ps", "TE")
+>     printf("{hline 76}\n")
+>     dw_row("NSW",      N1, mean(t), .,                  "185",   "0.37", "1794")
+>     dw_row("Full CPS", N0, mean(c), mean(yt)-mean(yc),  "15992", "0.01", "-8498")
+> 
+>     /* ---- without replacement ---- */
+>     labs  = ("WOR random", "WOR low to high", "WOR high to low")
+>     pte   = ("1559", "1605", "1559")
+>     for (r=1; r<=3; r++) {
+>         if (r==1) {
+>             rseed(seed)
+>             o = order((runiform(N1,1), (1::N1)), (1,2))
+>         }
+>         else if (r==2) o = order(( t, (1::N1)), (1,2))
+>         else           o = order((-t, (1::N1)), (1,2))
+> 
+>         used = J(N0, 1, 0)
+>         m    = J(N1, 1, .)
+>         for (k=1; k<=N1; k++) {
+>             i = o[k]
+>             d = abs(c :- t[i]) + 10*used      /* 쓴 control은 제외 */
+>             minindex(d, 1, idx, w)
+>             m[i] = min(idx)                    /* 동점이면 가장 앞 id */
+>             used[m[i]] = 1
+>         }
+>         dw_row(labs[r], N1, mean(c[m]), mean(yt - yc[m]), "185", "0.32", pte[r])
+>     }
+> 
+>     /* ---- nearest neighbor, with replacement ---- */
+>     j = J(N1, 1, .)
+>     ntied = 0
+>     for (i=1; i<=N1; i++) {
+>         d = abs(c :- t[i])
+>         minindex(d, 1, idx, w)
+>         j[i] = min(idx)
+>         if (rows(idx) > 1) ntied++
+>     }
+>     dw_row("Nearest neighbor", rows(uniqrows(j)), mean(c[j]), mean(yt - yc[j]),
+>            "119", "0.37", "1360")
+>     printf("    (treated with tied nearest controls: %4.0f -> kept 1 each)\n", ntied)
+> 
+>     /* ---- caliper ---- */
+>     deltas = (0.00001, 0.00005, 0.0001)
+>     clabs  = ("Caliper 0.00001", "Caliper 0.00005", "Caliper 0.0001")
+>     pn     = ("325", "1043", "1731")
+>     pte    = ("1119", "1158", "1122")
+>     for (s=1; s<=3; s++) {
+>         cnt = J(N0, 1, 0)
+>         sps = 0
+>         ste = 0
+>         nfb = 0
+>         for (i=1; i<=N1; i++) {
+>             sel = (abs(c :- t[i]) :<= deltas[s])
+>             n   = sum(sel)
+>             if (n == 0) {                      /* footnote 10: NN로 대체 */
+>                 sel = J(N0, 1, 0)
+>                 sel[j[i]] = 1
+>                 n   = 1
+>                 nfb++
+>             }
+>             cnt = cnt + sel
+>             sps = sps + sum(sel :* c)/n
+>             ste = ste + yt[i] - sum(sel :* yc)/n
+>         }
+>         dw_row(clabs[s], sum(cnt :> 0), sps/N1, ste/N1, pn[s], "0.37", pte[s])
+>         printf("    (pairs = %6.0f, treated with no control in caliper = %4.0f)\n", sum(cnt), nfb)
+>     }
+>     printf("{hline 76}\n")
+> }
+
+: end
+-------------------------------------------------------------------------------------------------------------------
+
+. 
+. sort id
+
+. 
+. * 2002 score로 Table 2 재현 (메인 결과)
+. mata: dw_table2("ps_02", 20260927)
+
+----------------------------------------------------------------------------
+DW 2002 Table 2 (CPS), score = ps_02
+                           obs  mean ps        TE    | paper:    ps     TE
+----------------------------------------------------------------------------
+NSW                        185   0.3661         .    |    185  0.37   1794
+Full CPS                 15992   0.0075   -8497.5    |  15992  0.01  -8498
+WOR random                 185   0.3157    1604.7    |    185  0.32   1559
+WOR low to high            185   0.3157    1604.7    |    185  0.32   1605
+WOR high to low            185   0.3156    1559.2    |    185  0.32   1559
+Nearest neighbor           119   0.3658    1359.6    |    119  0.37   1360
+    (treated with tied nearest controls:   30 -> kept 1 each)
+Caliper 0.00001            325   0.3658    1118.8    |    325  0.37   1119
+    (pairs =    400, treated with no control in caliper =  141)
+Caliper 0.00005           1043   0.3658    1157.7    |   1043  0.37   1158
+    (pairs =   1169, treated with no control in caliper =  126)
+Caliper 0.0001            1731   0.3658    1121.8    |   1731  0.37   1122
+    (pairs =   2142, treated with no control in caliper =  117)
+----------------------------------------------------------------------------
+
+. 
+. * 비교용: 1999 footnote (g) score를 그대로 썼을 때 (my code.do와 같은 score)
+. mata: dw_table2("ps_g", 20260927)
+
+----------------------------------------------------------------------------
+DW 2002 Table 2 (CPS), score = ps_g
+                           obs  mean ps        TE    | paper:    ps     TE
+----------------------------------------------------------------------------
+NSW                        185   0.4254         .    |    185  0.37   1794
+Full CPS                 15992   0.0066   -8497.5    |  15992  0.01  -8498
+WOR random                 185   0.2988    1055.0    |    185  0.32   1559
+WOR low to high            185   0.2988    1086.3    |    185  0.32   1605
+WOR high to low            185   0.2988    1055.0    |    185  0.32   1559
+Nearest neighbor           106   0.4256     951.9    |    119  0.37   1360
+    (treated with tied nearest controls:   31 -> kept 1 each)
+Caliper 0.00001            242   0.4256    1071.1    |    325  0.37   1119
+    (pairs =    331, treated with no control in caliper =  144)
+Caliper 0.00005            733   0.4256    1097.9    |   1043  0.37   1158
+    (pairs =    874, treated with no control in caliper =  127)
+Caliper 0.0001            1221   0.4256    1107.3    |   1731  0.37   1122
+    (pairs =   1614, treated with no control in caliper =  118)
+----------------------------------------------------------------------------
+
+. 
+. * 참고: 논문의 random 행은 난수 순서에 따라 달라지므로 정확히 같을 수 없다.
+. 
+. 
+. * ==========================================================
+. * STEP 5. DW 1999 Table 3, CPS-1 행 재현 — 1999 score vs 2002 score
+. *
+. *   (1) Unadjusted     : re78 on treat (전체 표본)
+. *   (2) Adjusted       : footnote (a) 공변량 + treat (전체 표본)
+. *   (3) Quadratic      : re78 on treat, ps, ps^2 (common support 표본)
+. *   (4) Strat. Unadj.  : block별 평균 차이를 treated 수로 가중평균
+. *   (5) Strat. Adj.    : block별 (a) 회귀의 treat 계수를 treated 수로 가중평균
+. *   (6) Observations   : treated 전부 + score가 [treated 최소, 최대]인 control
+. *   (7) Match. Unadj.  : NN with replacement (동점이면 id가 가장 작은 control)
+. *   (8) Match. Adj.    : (a) 공변량 WLS, treated 가중치 1,
+. *                        control 가중치 = 매칭된 횟수 (footnote d)
+. *
+. *   Block 규칙 (1999 논문에는 경계가 없어서 2002 appendix 알고리즘을 따름):
+. *     [0,1]을 nstart개의 같은 폭 구간으로 나눈 뒤, 어떤 구간에서 treated와
+. *     control의 평균 score가 유의하게 다르면(|t| > 1.96) 그 구간을 반으로
+. *     쪼갠다. 더 이상 쪼갤 구간이 없을 때까지 반복한다.
+. * ==========================================================
+. 
+. global XA "age age2 education nodegree black hispanic re74 re75"
+
+. * footnote (a): age, age^2, education, no degree, black, Hispanic, RE74, RE75
+. 
+. mata:
+------------------------------------------------- mata (type end to exit) -----------------------------------------
+: void dw_blocks(string scalar psv, string scalar supv, string scalar blkv,
+>                real scalar nstart, real scalar dosplit)
+> {
+>     P = st_data(., psv)
+>     S = st_data(., supv)
+>     D = st_data(., "treat")
+>     edges = rangen(0, 1, nstart+1)
+>     edges[rows(edges)] = 1 + 1e-7
+>     changed = 1
+>     while (changed & dosplit) {
+>         changed = 0
+>         newe = edges[1]
+>         for (k=1; k<rows(edges); k++) {
+>             lo = edges[k]
+>             hi = edges[k+1]
+>             inb = (S:==1) :& (P:>=lo) :& (P:<hi)
+>             a = select(P, inb :& (D:==1))
+>             b = select(P, inb :& (D:==0))
+>             dosp = 0
+>             if (rows(a)>=2 & rows(b)>=2 & (hi-lo)>1e-4) {
+>                 se = sqrt(variance(a)/rows(a) + variance(b)/rows(b))
+>                 if (se > 0) {
+>                     if (abs((mean(a)-mean(b))/se) > 1.96) dosp = 1
+>                 }
+>             }
+>             if (dosp) {
+>                 newe = newe \ (lo+hi)/2 \ hi
+>                 changed = 1
+>             }
+>             else newe = newe \ hi
+>         }
+>         edges = newe
+>     }
+>     blk = J(rows(P), 1, .)
+>     for (k=1; k<rows(edges); k++) {
+>         inb = (S:==1) :& (P:>=edges[k]) :& (P:<edges[k+1])
+>         if (sum(inb) > 0) blk[selectindex(inb)] = J(sum(inb), 1, k)
+>     }
+>     st_store(., blkv, blk)
+> }
+
+: 
+: void dw_nn(string scalar psv, string scalar wvar)
+> {
+>     P  = st_data(., psv)
+>     D  = st_data(., "treat")
+>     Y  = st_data(., "re78")
+>     ti = selectindex(D:==1)
+>     ci = selectindex(D:==0)
+>     t  = P[ti]
+>     c  = P[ci]
+>     w  = J(rows(P), 1, 0)
+>     w[ti] = J(rows(ti), 1, 1)
+>     att = 0
+>     idx = .
+>     ww  = .
+>     for (i=1; i<=rows(ti); i++) {
+>         minindex(abs(c :- t[i]), 1, idx, ww)
+>         k = ci[min(idx)]
+>         w[k] = w[k] + 1
+>         att = att + Y[ti[i]] - Y[k]
+>     }
+>     st_store(., wvar, w)
+>     st_numscalar("T3_c7", att/rows(ti))
+> }
+
+: end
+-------------------------------------------------------------------------------------------------------------------
+
+. 
+. capture program drop dw_table3
+
+. program define dw_table3
+  1.     args ps nstart dosplit
+  2.     tempvar sup blk w ps2
+  3.     quietly {
+  4.         * (1), (2): score와 무관
+.         regress re78 treat
+  5.         scalar T3_c1 = _b[treat]
+  6.         regress re78 treat $XA
+  7.         scalar T3_c2 = _b[treat]
+  8. 
+.         * common support, (6)
+.         sum `ps' if treat==1
+  9.         scalar T3_pmin = r(min)
+ 10.         scalar T3_pmax = r(max)
+ 11.         gen byte `sup' = (treat==1) | (`ps'>=T3_pmin & `ps'<=T3_pmax)
+ 12.         count if `sup'
+ 13.         scalar T3_c6 = r(N)
+ 14. 
+.         * (3)
+.         gen double `ps2' = `ps'^2
+ 15.         regress re78 treat `ps' `ps2' if `sup'
+ 16.         scalar T3_c3 = _b[treat]
+ 17. 
+.         * (4), (5)
+.         gen int `blk' = .
+ 18.         mata: dw_blocks("`ps'", "`sup'", "`blk'", `nstart', `dosplit')
+ 19.         levelsof `blk', local(bl)
+ 20.         scalar T3_s4 = 0
+ 21.         scalar T3_s5 = 0
+ 22.         scalar T3_n1 = 0
+ 23.         scalar T3_nb = 0
+ 24.         foreach b of local bl {
+ 25.             count if `blk'==`b' & treat==1
+ 26.             scalar T3_nt = r(N)
+ 27.             count if `blk'==`b' & treat==0
+ 28.             scalar T3_nc = r(N)
+ 29.             if T3_nt>0 & T3_nc>0 {
+ 30.                 sum re78 if `blk'==`b' & treat==1
+ 31.                 scalar T3_m1 = r(mean)
+ 32.                 sum re78 if `blk'==`b' & treat==0
+ 33.                 scalar T3_m0 = r(mean)
+ 34.                 regress re78 treat $XA if `blk'==`b'
+ 35.                 scalar T3_s4 = T3_s4 + T3_nt*(T3_m1 - T3_m0)
+ 36.                 scalar T3_s5 = T3_s5 + T3_nt*_b[treat]
+ 37.                 scalar T3_n1 = T3_n1 + T3_nt
+ 38.                 scalar T3_nb = T3_nb + 1
+ 39.             }
+ 40.         }
+ 41.         scalar T3_c4 = T3_s4/T3_n1
+ 42.         scalar T3_c5 = T3_s5/T3_n1
+ 43. 
+.         * (7), (8)
+.         gen double `w' = 0
+ 44.         mata: dw_nn("`ps'", "`w'")
+ 45.         regress re78 treat $XA [aw=`w'] if `w'>0
+ 46.         scalar T3_c8 = _b[treat]
+ 47.     }
+ 48. end
+
+. 
+. * ---- 메인: 세 score 각각 (ps_g = 1999 fn(g) 그대로, ps_99 = nodegree 제외, ps_02 = 2002), block 규칙 = 2002 app
+> endix (5개에서 시작, 쪼개기) ----
+. matrix T3 = J(4, 8, .)
+
+. local r = 0
+
+. foreach ps in ps_g ps_99 ps_02 {
+  2.     local ++r
+  3.     dw_table3 `ps' 5 1
+  4.     forvalues k = 1/8 {
+  5.         local v = T3_c`k'
+  6.         matrix T3[`r', `k'] = `v'
+  7.     }
+  8.     di as txt "`ps': blocks used = " as res T3_nb
+  9. }
+ps_g: blocks used = 10
+ps_99: blocks used = 9
+ps_02: blocks used = 12
+
+. matrix T3[4, 1] = (-8498, 972, 1117, 1713, 1774, 4117, 1582, 1616)
+
+. matrix rownames T3 = "1999 fn(g)" "1999 no nodeg" "2002 score" "Paper 1999"
+
+. matrix colnames T3 = "(1)Unadj" "(2)Adj" "(3)Quad" "(4)StrU" "(5)StrA" "(6)Obs" "(7)MatU" "(8)MatA"
+
+. 
+. di _n as txt "DW 1999 Table 3, CPS-1 row"
+
+DW 1999 Table 3, CPS-1 row
+
+. matlist T3, format(%9.0f) border(rows) twidth(14)
+
+-------------------------------------------------------------------------------------------------------
+               |  (1)Unadj     (2)Adj    (3)Quad    (4)StrU    (5)StrA     (6)Obs    (7)MatU    (8)MatA 
+---------------+---------------------------------------------------------------------------------------
+    1999 fn(g) |     -8498        739       1071       1538       1603       4041        952       1098 
+ 1999 no nodeg |     -8498        739       1109       1833       1877       3566       1582       1565 
+    2002 score |     -8498        739       1019       1521       1447       5009       1360       1400 
+    Paper 1999 |     -8498        972       1117       1713       1774       4117       1582       1616 
+-------------------------------------------------------------------------------------------------------
+
+. 
+. * ---- 민감도: block 규칙에 따라 (4), (5)가 얼마나 흔들리는지 (1999 score) ----
+. di _n as txt "Stratification sensitivity (1999 score)   [paper: (4) 1713, (5) 1774]"
+
+Stratification sensitivity (1999 score)   [paper: (4) 1713, (5) 1774]
+
+. di as txt %-26s "rule" %8s "(4)" %8s "(5)" %8s "blocks"
+rule                           (4)     (5)  blocks
+
+. foreach ns in 5 10 20 {
+  2.     foreach sp in 0 1 {
+  3.         quietly dw_table3 ps_99 `ns' `sp'
+  4.         local lab = cond(`sp', "`ns' equal, split", "`ns' equal, no split")
+  5.         di as txt %-26s "`lab'" as res %8.0f T3_c4 %8.0f T3_c5 %8.0f T3_nb
+  6.     }
+  7. }
+5 equal, no split             1318    1410       5
+5 equal, split                1833    1877       9
+10 equal, no split            1706    2256      10
+10 equal, split               1982    2323      12
+20 equal, no split            1692    2442      19
+20 equal, split               1846    2429      20
+
+. 
+. 
+. * ==========================================================
+. * STEP 6. Audit 1 — Overlap (1999 score, ps_99)
+. *   [과제 PDF: "Plot the two e-hat densities. Enforce common support,
+. *    report how many comparison units you dropped, and say what
+. *    population your ATT now describes."]
+. *
+. *   Common-support 규칙 (DW 1999, p.1058):
+. *     treated의 최소 score보다 작거나 최대 score보다 큰 comparison을 버린다.
+. *   참고 (Smith & Todd 2005, p.317, 334-335):
+. *     ST는 density가 0에 가까운 구간을 2% trimming으로 잘라내며,
+. *     그 결과 treated도 5-10% 버리게 된다. 아래에서는 DW 규칙을 쓰되,
+. *     comparison의 최대 score보다 큰 treated가 몇 명인지도 함께 보고해서
+. *     "treated 쪽도 support를 맞추면 ATT가 어떻게 바뀌는지"를 보인다.
+. * ==========================================================
+. 
+. * ---- (a) 세 score별 common support 요약 ----
+. di _n as txt "{hline 78}"
+
+------------------------------------------------------------------------------
+
+. di as txt %-8s "score" %10s "T min" %10s "T max" %10s "C max" ///
+>    %12s "C < T min" %12s "C > T max" %10s "T > C max"
+score        T min     T max     C max   C < T min   C > T max T > C max
+
+. di as txt "{hline 78}"
+------------------------------------------------------------------------------
+
+. foreach ps in ps_g ps_99 ps_02 {
+  2.     quietly sum `ps' if treat==1
+  3.     scalar O_tmin = r(min)
+  4.     scalar O_tmax = r(max)
+  5.     quietly sum `ps' if treat==0
+  6.     scalar O_cmax = r(max)
+  7.     quietly count if treat==0 & `ps' < O_tmin
+  8.     scalar O_clo = r(N)
+  9.     quietly count if treat==0 & `ps' > O_tmax
+ 10.     scalar O_chi = r(N)
+ 11.     quietly count if treat==1 & `ps' > O_cmax
+ 12.     scalar O_thi = r(N)
+ 13.     di as txt %-8s "`ps'" as res %10.5f O_tmin %10.5f O_tmax %10.5f O_cmax ///
+>        %12.0f O_clo %12.0f O_chi %10.0f O_thi
+ 14. }
+ps_g       0.00106   0.93846   0.92398       12136           0         6
+ps_99      0.00144   0.93943   0.90590       12611           0         7
+ps_02      0.00072   0.89281   0.87661       11168           0         1
+
+. di as txt "{hline 78}"
+------------------------------------------------------------------------------
+
+. di as txt "paper 1999 (Fig. 2): 12,611 comparison units discarded"
+paper 1999 (Fig. 2): 12,611 comparison units discarded
+
+. 
+. * ---- (b) 이후는 메인 score(ps_99)로 ----
+. quietly sum ps_99 if treat==1
+
+. scalar O_tmin = r(min)
+
+. scalar O_tmax = r(max)
+
+. quietly sum ps_99 if treat==0
+
+. scalar O_cmax = r(max)
+
+. gen byte cs_dw = (treat==1) | (ps_99 >= O_tmin & ps_99 <= O_tmax)
+
+. label var cs_dw "DW common support: all treated + controls within [T min, T max]"
+
+. 
+. count if treat==0 & cs_dw==0
+  12,611
+
+. di as txt "  -> comparison units dropped by the DW rule: " as res r(N)
+  -> comparison units dropped by the DW rule: 12611
+
+. count if treat==0 & cs_dw==1
+  3,381
+
+. di as txt "  -> comparison units kept: " as res r(N)
+  -> comparison units kept: 3381
+
+. 
+. * ---- (c) bin별 인원: 어디서 support가 얇은지 ----
+. gen double ps99_bin = min(floor(ps_99/0.1), 9)/10
+
+. label var ps99_bin "e-hat bin (lower edge, width 0.1)"
+
+. di _n as txt "Treated vs. kept comparison units by e-hat bin (ps_99)"
+
+Treated vs. kept comparison units by e-hat bin (ps_99)
+
+. tab ps99_bin treat if cs_dw
+
+ e-hat bin |
+    (lower |
+     edge, |         treat
+width 0.1) |         0          1 |     Total
+-----------+----------------------+----------
+         0 |     3,152         41 |     3,193 
+        .1 |        99         18 |       117 
+        .2 |        45         14 |        59 
+        .3 |        33         19 |        52 
+        .4 |        24         19 |        43 
+        .5 |         8         20 |        28 
+        .6 |         7         11 |        18 
+        .7 |         6          9 |        15 
+        .8 |         5         26 |        31 
+        .9 |         2          8 |        10 
+-----------+----------------------+----------
+     Total |     3,381        185 |     3,566 
+
+. 
+. * ---- (d) 그림 1: DW Figure 2 스타일 히스토그램 (support 안의 control만) ----
+. * histogram 명령은 막대를 자르지 못해서 첫 bin(control 약 3,000명) 때문에
+. * 나머지가 안 보인다. 그래서 bin별 인원을 직접 세고 200에서 잘라 그린 뒤,
+. * 잘린 막대에는 실제 인원을 라벨로 단다.
+. preserve
+
+.     keep if cs_dw
+(12,611 observations deleted)
+
+.     gen double b = floor(ps_99/0.05)*0.05
+
+.     contract treat b
+
+.     gen double nshow = min(_freq, 200)
+
+.     gen double x = b + cond(treat==1, 0.0375, 0.0125)
+
+.     gen str8 lab = string(_freq, "%9.0fc") if _freq > 200
+(37 missing values generated)
+
+.     twoway (bar nshow x if treat==0, barwidth(0.022) fcolor(gs12) lcolor(gs7)) ///
+>            (bar nshow x if treat==1, barwidth(0.022) fcolor(gs2) lcolor(gs2)) ///
+>            (scatter nshow x if _freq > 200, msymbol(none) mlabel(lab) ///
+>                 mlabposition(12) mlabcolor(black)), ///
+>            legend(order(2 "NSW treated (185)" 1 "CPS comparison on support (3,381)") ///
+>                   rows(1) position(6)) ///
+>            xlabel(0(0.1)1) ylabel(0(50)200) yscale(range(0 215)) ///
+>            xtitle("estimated propensity score (ps_99), bin width 0.05") ///
+>            ytitle("number of units") ///
+>            note("Bars above 200 are cut at 200; the label gives the true count." ///
+>                 "12,611 CPS units below the treated minimum are dropped and not shown.") ///
+>            name(overlap_hist, replace)
+
+.     graph export "overlap_hist_ps99.png", replace width(1200)
+file /Users/seunghyeon/myproject/Microeconometrics/Topic1/seunghyeon/overlap_hist_ps99.png saved as PNG format
+
+. restore
+
+. 
+. * ---- (e) 그림 2: Smith-Todd Figure 1 스타일, log odds의 density ----
+. gen double lodds_99 = ln(ps_99/(1 - ps_99)) if ps_99 > 0 & ps_99 < 1
+
+. label var lodds_99 "log odds of ps_99"
+
+. twoway (kdensity lodds_99 if treat==1, lcolor(black)) ///
+>        (kdensity lodds_99 if treat==0, lcolor(gs8) lpattern(dash)), ///
+>        legend(order(1 "NSW treated" 2 "CPS comparison (all)")) ///
+>        xtitle("log odds ratio, ln(e/(1-e))") ytitle("density") ///
+>        name(overlap_lodds, replace)
+
+. graph export "overlap_logodds_ps99.png", replace width(1200)
+file /Users/seunghyeon/myproject/Microeconometrics/Topic1/seunghyeon/overlap_logodds_ps99.png saved as PNG format
+
+. * score 자체로 그리면 CPS가 0 근처에 몰려서 모양이 안 보이므로,
+. * Smith-Todd처럼 log odds로 그린다 (순서는 score와 같다).
+. 
+. * ---- (f) treated 쪽 support: 매칭 ATT가 어느 집단의 효과인가 ----
+. mata:
+------------------------------------------------- mata (type end to exit) -----------------------------------------
+: void dw_nn_y(string scalar psv, string scalar yout)
+> {
+>     P  = st_data(., psv)
+>     D  = st_data(., "treat")
+>     Y  = st_data(., "re78")
+>     ti = selectindex(D:==1)
+>     ci = selectindex(D:==0)
+>     c  = P[ci]
+>     out = J(rows(P), 1, .)
+>     idx = .
+>     ww  = .
+>     for (i=1; i<=rows(ti); i++) {
+>         minindex(abs(c :- P[ti[i]]), 1, idx, ww)
+>         out[ti[i]] = Y[ci[min(idx)]]
+>     }
+>     st_store(., yout, out)
+> }
+
+: end
+-------------------------------------------------------------------------------------------------------------------
+
+. 
+. sort id
+
+. gen double y0_match = .
+(16,177 missing values generated)
+
+. mata: dw_nn_y("ps_99", "y0_match")
+
+. gen double nn_diff = re78 - y0_match if treat==1
+(15,992 missing values generated)
+
+. 
+. quietly count if treat==1 & ps_99 > O_cmax
+
+. scalar O_thi = r(N)
+
+. quietly sum nn_diff
+
+. di _n as txt "NN matching ATT, all 185 treated (DW rule)       = " as res %9.1f r(mean) ///
+>    as txt "   [paper 1999: 1,582]"
+
+NN matching ATT, all 185 treated (DW rule)       =    1582.5   [paper 1999: 1,582]
+
+. quietly sum nn_diff if ps_99 <= O_cmax
+
+. di as txt "NN matching ATT, treated with e-hat <= C max (" as res r(N) as txt ") = " ///
+>    as res %9.1f r(mean)
+NN matching ATT, treated with e-hat <= C max (178) =    1868.8
+
+. quietly sum nn_diff if ps_99 > O_cmax
+
+. di as txt "  the " as res O_thi as txt " treated above C max: mean matched difference = " ///
+>    as res %9.1f r(mean)
+  the 7 treated above C max: mean matched difference =   -5699.8
+
+. * 서술 포인트:
+. *   - DW 규칙은 comparison만 버린다 (12,611명). 모든 treated가 남으므로
+. *     ATT는 형식상 NSW 참가자 185명 전체에 대한 효과다.
+. *   - 하지만 treated 중 7명은 가장 높은 comparison score보다 score가 높아서,
+. *     실제로는 score가 더 낮은 comparison과 매칭된다 (support 밖 외삽).
+. *   - 이 7명까지 support를 맞추면 ATT는 "comparison과 겹치는 score 구간의
+. *     참가자"에 대한 효과로 좁혀지고, 값이 크게 바뀐다.
+. 
+. 
+. 
+. * ==========================================================
+. * STEP 7. Audit 2 — Balance
+. *   [과제 PDF: "Within propensity-score strata, compare covariate means
+. *    across treated and controls. Report balance before and after your
+. *    adjustment, and say which covariates required refitting the score."]
+. *
+. *   세 가지 score를 비교한다.
+. *     ps_lin : DW appendix의 출발점. 공변량을 선형으로만 넣은 logit
+. *              (age, education, married, nodegree, black, hispanic, re74, re75)
+. *     ps_g   : 1999 footnote (g) 그대로
+. *     ps_99  : footnote (g)에서 nodegree 제외 (메인)
+. *
+. *   각 score마다
+. *     - strata: STEP 5와 같은 block 규칙 (2002 appendix, 5개에서 시작해 쪼개기),
+. *               DW common support (treated 전부 + [T min, T max] 안의 control)
+. *     - raw     : 조정 전, treated 185 vs CPS 15,992의 standardized difference
+. *     - strat   : block 안의 평균 차이를 treated 수로 가중평균한 standardized difference
+. *     - sig     : block 안 t-test(|t| > 1.96)에서 유의한 block 수 / 검정한 block 수
+. *                 (DW의 balancing test; 양쪽에 2명 이상 있는 block만 검정)
+. *     - matched : NN 매칭(with replacement) 표본의 standardized difference
+. *                 (control은 매칭된 횟수로 가중)
+. *   standardized difference = (평균 차이) / sqrt((var_T + var_C)/2),
+. *   분모는 조정 전 전체 표본의 분산으로 고정. |d| < 0.1이면 관례상 balance 양호.
+. * ==========================================================
+. 
+. logit treat age education married nodegree black hispanic re74 re75
+
+Iteration 0:  Log likelihood = -1011.0713  
+Iteration 1:  Log likelihood = -700.17756  
+Iteration 2:  Log likelihood = -546.20099  
+Iteration 3:  Log likelihood = -505.87943  
+Iteration 4:  Log likelihood = -502.08054  
+Iteration 5:  Log likelihood = -502.05857  
+Iteration 6:  Log likelihood = -502.05857  
+
+Logistic regression                                    Number of obs =  16,177
+                                                       LR chi2(8)    = 1018.03
+                                                       Prob > chi2   =  0.0000
+Log likelihood = -502.05857                            Pseudo R2     =  0.5034
+
+------------------------------------------------------------------------------
+       treat | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         age |  -.0037783    .009794    -0.39   0.700    -.0229741    .0154175
+   education |   .0345835   .0469002     0.74   0.461    -.0573392    .1265063
+     married |  -.9899151   .2346126    -4.22   0.000    -1.449747   -.5300828
+    nodegree |   1.035507   .2639737     3.92   0.000     .5181283    1.552886
+       black |    4.20685   .2578566    16.31   0.000      3.70146     4.71224
+    hispanic |   1.793627   .3908924     4.59   0.000     1.027492    2.559762
+        re74 |  -.0000293   .0000271    -1.08   0.281    -.0000825     .000024
+        re75 |  -.0002118   .0000359    -5.90   0.000    -.0002821   -.0001414
+       _cons |  -5.604994   .7798601    -7.19   0.000    -7.133492   -4.076497
+------------------------------------------------------------------------------
+
+. predict double ps_lin, pr
+
+. 
+. global BALX "age education black hispanic married nodegree re74 re75 u74 u75"
+
+. 
+. capture program drop dw_balance
+
+. program define dw_balance
+  1.     args ps lab
+  2.     tempvar sup blk w
+  3.     quietly {
+  4.         sum `ps' if treat==1
+  5.         scalar B_tmin = r(min)
+  6.         scalar B_tmax = r(max)
+  7.         gen byte `sup' = (treat==1) | (`ps'>=B_tmin & `ps'<=B_tmax)
+  8.         gen int `blk' = .
+  9.         mata: dw_blocks("`ps'", "`sup'", "`blk'", 5, 1)
+ 10.         levelsof `blk', local(bl)
+ 11.         gen double `w' = 0
+ 12.         mata: dw_nn("`ps'", "`w'")
+ 13.     }
+ 14.     local nb : word count `bl'
+ 15.     di _n as txt "{hline 78}"
+ 16.     di as txt "Balance, score = `lab'   (blocks = `nb')"
+ 17.     di as txt %-11s "covariate" %11s "raw" %11s "strat" %11s "sig/tested" %11s "matched"
+ 18.     di as txt "{hline 78}"
+ 19.     foreach v of global BALX {
+ 20.         quietly {
+ 21.             sum `v' if treat==1
+ 22.             scalar B_m1 = r(mean)
+ 23.             scalar B_v1 = r(Var)
+ 24.             sum `v' if treat==0
+ 25.             scalar B_m0 = r(mean)
+ 26.             scalar B_v0 = r(Var)
+ 27.             scalar B_sd = sqrt((B_v1 + B_v0)/2)
+ 28.             scalar B_raw = (B_m1 - B_m0)/B_sd
+ 29. 
+.             scalar B_acc = 0
+ 30.             scalar B_n1  = 0
+ 31.             scalar B_sig = 0
+ 32.             scalar B_tst = 0
+ 33.             foreach b of local bl {
+ 34.                 sum `v' if `blk'==`b' & treat==1
+ 35.                 scalar B_a_n = r(N)
+ 36.                 scalar B_a_m = r(mean)
+ 37.                 scalar B_a_v = r(Var)
+ 38.                 sum `v' if `blk'==`b' & treat==0
+ 39.                 scalar B_b_n = r(N)
+ 40.                 scalar B_b_m = r(mean)
+ 41.                 scalar B_b_v = r(Var)
+ 42.                 if B_a_n>0 & B_b_n>0 {
+ 43.                     scalar B_acc = B_acc + B_a_n*(B_a_m - B_b_m)
+ 44.                     scalar B_n1  = B_n1 + B_a_n
+ 45.                 }
+ 46.                 if B_a_n>=2 & B_b_n>=2 {
+ 47.                     scalar B_tst = B_tst + 1
+ 48.                     scalar B_se = sqrt(B_a_v/B_a_n + B_b_v/B_b_n)
+ 49.                     if B_se > 0 {
+ 50.                         if abs((B_a_m - B_b_m)/B_se) > 1.96 scalar B_sig = B_sig + 1
+ 51.                     }
+ 52.                 }
+ 53.             }
+ 54.             scalar B_strat = (B_acc/B_n1)/B_sd
+ 55. 
+.             sum `v' [aw=`w'] if treat==1
+ 56.             scalar B_mm1 = r(mean)
+ 57.             sum `v' [aw=`w'] if treat==0 & `w'>0
+ 58.             scalar B_mm0 = r(mean)
+ 59.             scalar B_match = (B_mm1 - B_mm0)/B_sd
+ 60.         }
+ 61.         local sigtxt = string(B_sig) + "/" + string(B_tst)
+ 62.         di as txt %-11s "`v'" as res %11.3f B_raw %11.3f B_strat %11s "`sigtxt'" %11.3f B_match
+ 63.     }
+ 64.     di as txt "{hline 78}"
+ 65. end
+
+. 
+. sort id
+
+. dw_balance ps_lin "linear (DW starting point)"
+
+------------------------------------------------------------------------------
+Balance, score = linear (DW starting point)   (blocks = 18)
+covariate          raw      strat sig/tested    matched
+------------------------------------------------------------------------------
+age             -0.796      0.054       2/13      0.306
+education       -0.679     -0.045       0/13      0.004
+black            2.428      0.017       3/13      0.051
+hispanic        -0.051      0.047       3/13      0.065
+married         -1.233      0.024       3/13      0.089
+nodegree         0.904      0.041       2/13      0.000
+re74            -1.569      0.005       2/13      0.010
+re75            -1.746      0.027       3/13      0.032
+u74              1.487      0.602       4/13      0.656
+u75              1.192      0.230       4/13      0.197
+------------------------------------------------------------------------------
+
+. dw_balance ps_g   "1999 fn(g) as written"
+
+------------------------------------------------------------------------------
+Balance, score = 1999 fn(g) as written   (blocks = 10)
+covariate          raw      strat sig/tested    matched
+------------------------------------------------------------------------------
+age             -0.796     -0.039       0/10      0.017
+education       -0.679     -0.025       2/10     -0.183
+black            2.428     -0.040       1/10     -0.102
+hispanic        -0.051      0.041       3/10      0.131
+married         -1.233      0.026       0/10      0.013
+nodegree         0.904      0.035       2/10      0.249
+re74            -1.569     -0.005       0/10      0.034
+re75            -1.746      0.000       0/10      0.008
+u74              1.487      0.056       0/10     -0.150
+u75              1.192      0.076       0/10      0.000
+------------------------------------------------------------------------------
+
+. dw_balance ps_99  "1999 without nodegree (main)"
+
+------------------------------------------------------------------------------
+Balance, score = 1999 without nodegree (main)   (blocks = 9)
+covariate          raw      strat sig/tested    matched
+------------------------------------------------------------------------------
+age             -0.796     -0.052        1/9     -0.117
+education       -0.679      0.013        2/9     -0.070
+black            2.428     -0.032        0/9     -0.068
+hispanic        -0.051      0.036        1/9      0.087
+married         -1.233     -0.015        1/9     -0.013
+nodegree         0.904      0.131        1/9      0.142
+re74            -1.569     -0.012        1/9     -0.002
+re75            -1.746     -0.005        0/9      0.020
+u74              1.487      0.065        0/9     -0.055
+u75              1.192      0.154        1/9     -0.013
+------------------------------------------------------------------------------
+
+. 
+. * 서술 포인트 (Audit 2):
+. *   - 조정 전(raw)에는 거의 모든 공변량이 |d| > 0.5로 크게 불균형하다
+. *     (black 2.4, re74 -1.6, re75 -1.7, married -1.2 등).
+. *   - 선형 score로 stratify하면 대부분 맞춰지지만 u74, u75가 남는다
+. *     (strat 약 0.60, 0.23; 매칭 후에도 0.66, 0.20). 그래서 u74, u75와
+. *     고차항·교차항(age^2, age^3, educ^2, educ*re74)을 넣어 score를 다시
+. *     추정해야 했다 — 이것이 footnote (g) spec이 된 이유로 볼 수 있다.
+. *   - footnote (g) score는 stratum 안에서 모든 공변량이 |d| < 0.1이지만,
+. *     NN 매칭 표본에서는 nodegree(약 0.25), education, hispanic, u74 등이
+. *     0.1을 넘는다.
+. *   - nodegree를 뺀 score(메인)는 매칭 표본의 balance가 오히려 더 좋다
+. *     (nodegree 약 0.14, 나머지는 대부분 0.1 안쪽). 단, stratum 기준으로는
+. *     nodegree(약 0.13)와 u75(약 0.15)가 조금 남는다.
+. *   - 매칭 표본 기준으로 가장 큰 잔여 불균형은 nodegree다. 그래서 (8)처럼
+. *     매칭 후 회귀 조정을 하는 것이 의미가 있다.
+. 
+. 
+. 
+. * ==========================================================
+. * STEP 8. Audit 3 — Sample selection (DW sample vs. LaLonde sample)
+. *   [과제 PDF: "re-estimate your matched ATT on LaLonde's sample, where
+. *    re74 does not exist and cannot enter the score, and compare the
+. *    three numbers: benchmark, DW-sample ATT, LaLonde-sample ATT."]
+. *
+. *   2 x 2로 나눠 본다.
+. *     표본: DW (185 treated) vs LaLonde (297 treated), comparison은 둘 다 CPS-1
+. *     score: RE74 포함 vs RE74 제외
+. *   DW 표본에서 RE74를 뺀 score도 계산해야, "표본을 바꾼 효과"와
+. *   "RE74를 score에서 뺀 효과"를 구분할 수 있다.
+. *
+. *   RE74 제외 spec = footnote (g)에서 re74, u74, educ*re74 세 항을 뺀 것.
+. *   메인 spec과 맞추기 위해 nodegree 포함/제외 두 버전을 모두 계산한다.
+. *   매칭: STEP 5와 같은 NN with replacement (동점이면 id가 작은 control).
+. * ==========================================================
+. 
+. capture program drop nn_att
+
+. program define nn_att, rclass
+  1.     args ps
+  2.     tempvar w
+  3.     quietly {
+  4.         gen double `w' = 0
+  5.         mata: dw_nn("`ps'", "`w'")
+  6.         count if treat==0 & `w' > 0
+  7.         return scalar nuc = r(N)
+  8.         sum `ps' if treat==1
+  9.         scalar S_tmin = r(min)
+ 10.         count if treat==0 & `ps' < S_tmin
+ 11.         return scalar disc = r(N)
+ 12.     }
+ 13.     return scalar att = T3_c7
+ 14. end
+
+. 
+. global XN74  "age age2 age3 education educ2 married nodegree black hispanic re75 u75"
+
+. global XN74b "age age2 age3 education educ2 married black hispanic re75 u75"
+
+. 
+. * ---- (a) DW 표본 (현재 메모리의 데이터) ----
+. sort id
+
+. nn_att ps_g
+
+. scalar A_dw_g = r(att)
+
+. nn_att ps_99
+
+. scalar A_dw_99 = r(att)
+
+. 
+. quietly logit treat $XN74
+
+. predict double ps_dw_n74, pr
+
+. nn_att ps_dw_n74
+
+. scalar A_dw_n74 = r(att)
+
+. 
+. quietly logit treat $XN74b
+
+. predict double ps_dw_n74b, pr
+
+. nn_att ps_dw_n74b
+
+. scalar A_dw_n74b = r(att)
+
+. 
+. * ---- (b) LaLonde 표본: benchmark ----
+. use "nsw.dta", clear
+
+. describe, short
+
+Contains data from nsw.dta
+ Observations:           722                  
+    Variables:            10                  18 May 2012 09:35
+Sorted by: 
+
+. tab treat
+
+      treat |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        425       58.86       58.86
+          1 |        297       41.14      100.00
+------------+-----------------------------------
+      Total |        722      100.00
+
+. * treat==1: 297, treat==0: 425 이어야 LaLonde 표본이다. re74 변수는 없다.
+. regress re78 treat
+
+      Source |       SS           df       MS      Number of obs   =       722
+-------------+----------------------------------   F(1, 720)       =      3.52
+       Model |   137332501         1   137332501   Prob > F        =    0.0609
+    Residual |  2.8053e+10       720  38962866.3   R-squared       =    0.0049
+-------------+----------------------------------   Adj R-squared   =    0.0035
+       Total |  2.8191e+10       721  39099301.3   Root MSE        =      6242
+
+------------------------------------------------------------------------------
+        re78 | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       treat |   886.3037   472.0863     1.88   0.061    -40.52635    1813.134
+       _cons |   5090.048   302.7826    16.81   0.000     4495.606    5684.491
+------------------------------------------------------------------------------
+
+. scalar bench_la = _b[treat]
+
+. di as txt "Experimental benchmark, LaLonde sample = " as res %9.1f bench_la as txt "   [about 886]"
+Experimental benchmark, LaLonde sample =     886.3   [about 886]
+
+. 
+. * ---- (c) LaLonde 표본: NSW treated 297 + CPS-1 ----
+. keep if treat == 1
+(425 observations deleted)
+
+. append using "cps_controls.dta"
+(variable treat was byte, now float to accommodate using data's values)
+(variable age was byte, now float to accommodate using data's values)
+(variable education was byte, now float to accommodate using data's values)
+(variable black was byte, now float to accommodate using data's values)
+(variable hispanic was byte, now float to accommodate using data's values)
+(variable married was byte, now float to accommodate using data's values)
+(variable nodegree was byte, now float to accommodate using data's values)
+
+. replace treat = 0 if missing(treat)
+(0 real changes made)
+
+. drop re74
+
+. * cps_controls.dta에는 re74가 있지만 NSW 쪽에는 없으므로, 실수로 쓰지 않게 지운다.
+. gen long id  = _n
+
+. gen age2     = age^2
+
+. gen age3     = age^3
+
+. gen educ2    = education^2
+
+. gen u75      = (re75 == 0)
+
+. tab treat
+
+      treat |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     15,992       98.18       98.18
+          1 |        297        1.82      100.00
+------------+-----------------------------------
+      Total |     16,289      100.00
+
+. sort id
+
+. 
+. quietly logit treat $XN74
+
+. predict double ps_la_n74, pr
+
+. nn_att ps_la_n74
+
+. scalar A_la_n74 = r(att)
+
+. scalar D_la_n74 = r(disc)
+
+. 
+. quietly logit treat $XN74b
+
+. predict double ps_la_n74b, pr
+
+. nn_att ps_la_n74b
+
+. scalar A_la_n74b = r(att)
+
+. scalar D_la_n74b = r(disc)
+
+. 
+. di _n as txt "LaLonde sample: comparison units below the treated minimum = " ///
+>    as res D_la_n74 as txt " (with nodegree), " as res D_la_n74b as txt " (without nodegree)"
+
+LaLonde sample: comparison units below the treated minimum = 7759 (with nodegree), 7941 (without nodegree)
+
+. 
+. * ---- (d) 비교표 ----
+. matrix A3 = J(5, 4, .)
+
+. local v = bench_dw
+
+. matrix A3[1,1] = `v'
+
+. local v = bench_la
+
+. matrix A3[1,3] = `v'
+
+. local r = 1
+
+. foreach p in "A_dw_g ." "A_dw_99 ." "A_dw_n74 A_la_n74" "A_dw_n74b A_la_n74b" {
+  2.     local ++r
+  3.     local a : word 1 of `p'
+  4.     local b : word 2 of `p'
+  5.     local v = `a'
+  6.     matrix A3[`r',1] = `v'
+  7.     local v = `a' - bench_dw
+  8.     matrix A3[`r',2] = `v'
+  9.     if "`b'" != "." {
+ 10.         local v = `b'
+ 11.         matrix A3[`r',3] = `v'
+ 12.         local v = `b' - bench_la
+ 13.         matrix A3[`r',4] = `v'
+ 14.     }
+ 15. }
+
+. matrix rownames A3 = "Experimental benchmark" "Matching, RE74, fn(g)" ///
+>     "Matching, RE74, no nodeg" "Matching, no RE74" "Matching, no RE74 no nodeg"
+
+. * 행 이름에 콜론(:)을 쓰면 Stata가 equation 이름으로 읽어서 표가 쪼개지므로 쉼표를 쓴다.
+. matrix colnames A3 = "DW ATT" "DW bias" "LaLonde ATT" "LaLonde bias"
+
+. 
+. di _n as txt "Audit 3: benchmark vs. matching ATT, DW sample vs. LaLonde sample (CPS-1)"
+
+Audit 3: benchmark vs. matching ATT, DW sample vs. LaLonde sample (CPS-1)
+
+. di as txt "bias = matching ATT - experimental benchmark of the same sample; . = not available (no RE74)"
+bias = matching ATT - experimental benchmark of the same sample; . = not available (no RE74)
+
+. matlist A3, format(%12.0f) border(rows) twidth(28)
+
+-------------------------------------------------------------------------------------
+                             |       DW ATT       DW bias   LaLonde ATT  LaLonde bias 
+-----------------------------+-------------------------------------------------------
+      Experimental benchmark |         1794             .           886             . 
+       Matching, RE74, fn(g) |          952          -842             .             . 
+    Matching, RE74, no nodeg |         1582          -212             .             . 
+           Matching, no RE74 |         1169          -625          -912         -1798 
+  Matching, no RE74 no nodeg |          877          -917          -640         -1527 
+-------------------------------------------------------------------------------------
+
+. 
+. * 서술 포인트 (Audit 3):
+. *   - DW가 RE74를 쓰려고 두 해 소득이 있는 사람으로 표본을 줄였다 (DW 1999
+. *     p.1054: 일찍 등록했거나, 늦게 등록했어도 등록 전에 실업 상태였던 사람).
+. *     Smith-Todd(Table 2)에 따르면 이 규칙은 1976년 4월 이후 등록자 중
+. *     소득이 있던 사람을 빼므로, 등록 전 소득이 낮은 사람 쪽으로 표본이
+. *     기울고 Ashenfelter dip이 약해진다.
+. *   - 그 결과 실험 benchmark 자체가 886에서 1,794로 바뀐다. 즉 두 표본은
+. *     서로 다른 모집단의 효과를 추정한다.
+. *   - 같은 CPS-1 comparison, 같은 매칭 방법인데도 LaLonde 표본의 매칭 ATT는
+. *     음수로 크게 빗나간다. DW 표본에서 RE74만 뺀 경우와 비교하면, 차이의
+. *     대부분이 RE74 변수가 아니라 표본 구성에서 온다는 것을 보일 수 있다.
+. *   - 이것이 Smith and Todd (2005)의 주장이다: DW의 낮은 bias는 특정 표본
+. *     선택과 score spec에 크게 의존한다.
+. 
+. 
+. log close
+      name:  <unnamed>
+       log:  /Users/seunghyeon/myproject/Microeconometrics/Topic1/seunghyeon/new_code_log.log
+  log type:  text
+ closed on:  28 Sep 2026, 17:55:27
+-------------------------------------------------------------------------------------------------------------------
