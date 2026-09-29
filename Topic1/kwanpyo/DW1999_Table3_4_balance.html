@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>DW1999_Table3_4_balance</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 1150px;
+margin: 2em auto; padding: 0 1.2em; line-height: 1.5; color: #1a1a1a; font-size: 15px; }
+h1 { border-bottom: 2px solid #333; padding-bottom: .2em; margin-top: 1.6em; }
+h2 { border-bottom: 1px solid #bbb; padding-bottom: .15em; margin-top: 1.4em; }
+code { font-family: Menlo, Consolas, monospace; font-size: .88em; }
+pre { background: #f6f8fa; border: 1px solid #e1e4e8; border-radius: 4px; padding: .7em; overflow-x: auto;
+font-size: 12px; line-height: 1.35; }
+pre.python, div.sourceCode { background: #f3f6fb; }
+.table-wrap { overflow-x: auto; margin: .8em 0 1.2em; }
+table { border-collapse: collapse; font-size: 12px; }
+th, td { border: 1px solid #d0d7de; padding: 3px 7px; text-align: right; white-space: nowrap; }
+thead th { background: #eef1f4; }
+tbody th { background: #f7f8fa; text-align: left; }
+table:not(.dataframe) td, table:not(.dataframe) th { text-align: left; white-space: normal; }
+@media print {
+body { max-width: none; margin: 0; font-size: 11px; }
+pre { font-size: 8.5px; white-space: pre-wrap; word-break: break-all; }
+table { font-size: 8.5px; }
+h1, h2, h3 { page-break-after: avoid; }
+.table-wrap, table { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="summary" style="border:2px solid #333;border-radius:6px;padding:.9em 1.2em;margin:1.2em 0 2em;background:#fafbfc;">
+<h2 style="margin-top:0;border:none;">Summary</h2>
+<p><b>Reproducing Table 3.</b> SH's setup reproduces the matching estimates (column 7) exactly for all three groups: PSID-1 1,691; CPS-1 1,582; CPS-3 587. The stratification columns (3)–(6) are not reproduced under either setup.</p>
+<p><b>Matching balance</b> (standardized difference; balanced if |d| &lt; 10 for every covariate): <b>not balanced for any group or version</b>, including the paper's own matched samples. <code>nodegree</code> is the main problem.</p>
+<table style="font-size:12px;border-collapse:collapse;margin-bottom:1em;">
+<thead><tr><th style="text-align:left">Max |d| (%)</th><th>(i) Paper</th><th>(ii) Reproduction</th><th>(iii) SH</th></tr></thead>
+<tbody>
+<tr><th style="text-align:left">PSID-1</th><td>34.5</td><td>31.8</td><td>35.4</td></tr>
+<tr><th style="text-align:left">CPS-1</th><td>14.9</td><td>24.9</td><td>14.2</td></tr>
+<tr><th style="text-align:left">CPS-3</th><td>37.6</td><td>14.7</td><td>37.6</td></tr>
+</tbody></table>
+<p><b>Stratification balance</b> (within-stratum t-tests, |t| &gt; 1.96): <b>not balanced for any group under either version</b>. Failures run 1.6–3 times what chance alone would give. The covariates that fail most often are Hispanic, black, married and RE74, mostly in the lowest- and highest-score strata.</p>
+<table style="font-size:12px;border-collapse:collapse;">
+<thead><tr><th style="text-align:left">Failing tests / tests (chance)</th><th>(ii) Reproduction</th><th>(iii) SH</th></tr></thead>
+<tbody>
+<tr><th style="text-align:left">PSID-1</th><td>11 / 80 (4.0)</td><td>10 / 80 (4.0)</td></tr>
+<tr><th style="text-align:left">CPS-1</th><td>27 / 180 (9.0)</td><td>8 / 90 (4.5)</td></tr>
+<tr><th style="text-align:left">CPS-3</th><td>8 / 100 (5.0)</td><td>6 / 50 (2.5)</td></tr>
+</tbody></table>
+<p style="font-size:12px;color:#555;margin-bottom:0">The paper publishes no strata, so stratification balance can be checked only for the two reproductions. No score adjustments were made.</p>
+</div>
+
+<h1 id="dehejia-wahba-1999-jasa-tables-34-and-covariate-balance">Dehejia
+&amp; Wahba (1999, <em>JASA</em>): Tables 3–4 and covariate balance</h1>
+<p>Three versions of each result are compared:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Label</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>(i) Paper</strong></td>
+<td>the values printed in the paper</td>
+</tr>
+<tr class="even">
+<td><strong>(ii) Reproduction</strong></td>
+<td>our reproduction using the method the paper describes (Table 3 notes
+and the Appendix)</td>
+</tr>
+<tr class="odd">
+<td><strong>(iii) SH</strong></td>
+<td>our reproduction using the setup in SH’s note
+(<code>DW_propensity_score_notes.html</code>)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Part 1:</strong> Table 3 (estimates) and Table 4 (matched
+samples), with a covariate-balance check for matching.</li>
+<li><strong>Part 2:</strong> the covariate-balance check for
+stratification, showing which covariates fail and in which strata. No
+adjustments are made here.</li>
+</ul>
+<p>Comparison groups: <strong>PSID-1</strong>
+(<code>psid_controls</code>), <strong>CPS-1</strong>
+(<code>cps_controls</code>) and <strong>CPS-3</strong> (the 429
+comparison units in <code>cps3re74</code>). Put the notebook in the
+folder with the <code>.dta</code> files. Packages: <code>numpy</code>,
+<code>scipy</code>, <code>pandas</code>. <strong>Run time:</strong> a
+few minutes with 500 bootstrap replications. Set <code>REPS = 100</code>
+for a quick run.</p>
+<h3 id="reproduction-vs.-sh">Reproduction vs. SH</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>(ii) Reproduction (the paper’s method)</th>
+<th>(iii) SH</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Score</td>
+<td>logit with a constant; covariates as in Table 3 notes (e) and (g),
+<strong>with <code>nodegree</code></strong></td>
+<td>logit with a constant; the same covariates <strong>without
+<code>nodegree</code></strong></td>
+</tr>
+<tr class="even">
+<td>Strata for (3)–(6)</td>
+<td>Appendix algorithm: 5 equal score ranges on the common support;
+split a stratum in half when the <strong>score or any covariate</strong>
+differs significantly
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>t</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>&gt;</mo><mn>1.96</mn></mrow><annotation encoding="application/x-tex">|t|&gt;1.96</annotation></semantics></math>),
+provided each half keeps ≥ 3 treated and ≥ 3 comparison units</td>
+<td>5 equal-width blocks on [0, 1]; split a block in half while the
+<strong>mean score</strong> differs between treated and comparison units
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>t</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>&gt;</mo><mn>1.96</mn></mrow><annotation encoding="application/x-tex">|t|&gt;1.96</annotation></semantics></math>)</td>
+</tr>
+<tr class="odd">
+<td>Covariates in (2), (5), (8)</td>
+<td>footnote (a): age, age², education, no degree, black, Hispanic,
+RE74, RE75</td>
+<td>the same</td>
+</tr>
+<tr class="even">
+<td>Matching (7)–(8)</td>
+<td>nearest neighbor with replacement; ties go to the first comparison
+unit in data order</td>
+<td>the same</td>
+</tr>
+</tbody>
+</table>
+<p>Both setups keep all treated units, plus the comparison units whose
+score lies between the treated minimum and maximum (note c).</p>
+<p><strong>Our choices where neither source is specific:</strong></p>
+<ul>
+<li><strong>Merging strata:</strong> a stratum with treated units but no
+comparison units is merged into its neighbor.</li>
+<li><strong>Standard errors:</strong> stratification SEs are analytic
+within-stratum SEs. Matching SEs come from a bootstrap that re-estimates
+the score and redoes the matching in each replication. JASA does not say
+how its SEs were computed.</li>
+<li><strong>Column (8) under SH:</strong> SH’s covariates (footnote a)
+give 1,565 for CPS-1. The paper’s 1,616 is reproduced exactly only with
+the linear set: age, education, black, Hispanic, no degree, married,
+RE74, RE75, u74, u75.</li>
+</ul>
+<h2 id="setup">0. Setup</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> expit</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">&quot;display.width&quot;</span>, <span class="dv">250</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">&quot;display.max_columns&quot;</span>, <span class="dv">30</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">&quot;display.max_colwidth&quot;</span>, <span class="dv">90</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>REPS <span class="op">=</span> <span class="dv">500</span>      <span class="co"># bootstrap replications for the matching SEs</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">12345</span></span></code></pre></div>
+<h3 id="data-and-helpers">Data and helpers</h3>
+<ul>
+<li><strong>Score terms</strong> are written as strings:
+<code>&quot;age^2&quot;</code> is a square, <code>&quot;education*re74&quot;</code> is an
+interaction. <code>add_terms</code> creates the column when it is
+needed.</li>
+<li><strong>Estimation:</strong> <code>logit_ps</code> fits the logit by
+Newton–Raphson; <code>ols_se</code> returns a coefficient and its
+homoskedastic SE (weights optional).</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load(name):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> pd.read_stata(<span class="ss">f&quot;</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">.dta&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> d.drop(columns<span class="op">=</span>[c <span class="cf">for</span> c <span class="kw">in</span> [<span class="st">&quot;data_id&quot;</span>, <span class="st">&quot;age2&quot;</span>] <span class="cf">if</span> c <span class="kw">in</span> d])</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> d.rename(columns<span class="op">=</span>{<span class="st">&quot;ed&quot;</span>: <span class="st">&quot;education&quot;</span>, <span class="st">&quot;hisp&quot;</span>: <span class="st">&quot;hispanic&quot;</span>, <span class="st">&quot;nodeg&quot;</span>: <span class="st">&quot;nodegree&quot;</span>})</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> d.astype(<span class="bu">float</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    d[<span class="st">&quot;u74&quot;</span>] <span class="op">=</span> (d.re74 <span class="op">==</span> <span class="dv">0</span>).astype(<span class="bu">float</span>)          <span class="co"># zero earnings in 1974</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    d[<span class="st">&quot;u75&quot;</span>] <span class="op">=</span> (d.re75 <span class="op">==</span> <span class="dv">0</span>).astype(<span class="bu">float</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>nsw <span class="op">=</span> load(<span class="st">&quot;nsw_dw&quot;</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>treated <span class="op">=</span> nsw[nsw.treat <span class="op">==</span> <span class="dv">1</span>].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>c3 <span class="op">=</span> load(<span class="st">&quot;cps3re74&quot;</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>GROUPS <span class="op">=</span> {<span class="st">&quot;PSID-1&quot;</span>: load(<span class="st">&quot;psid_controls&quot;</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;CPS-1&quot;</span>:  load(<span class="st">&quot;cps_controls&quot;</span>),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;CPS-3&quot;</span>:  c3[c3.treat <span class="op">==</span> <span class="dv">0</span>].reset_index(drop<span class="op">=</span><span class="va">True</span>)}</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_terms(d, terms):</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> terms:</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> t <span class="kw">in</span> d:</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> t.endswith(<span class="st">&quot;^2&quot;</span>):</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            d[t] <span class="op">=</span> d[t[:<span class="op">-</span><span class="dv">2</span>]] <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> t.endswith(<span class="st">&quot;^3&quot;</span>):</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            d[t] <span class="op">=</span> d[t[:<span class="op">-</span><span class="dv">2</span>]] <span class="op">**</span> <span class="dv">3</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>            a, b <span class="op">=</span> t.split(<span class="st">&quot;*&quot;</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            d[t] <span class="op">=</span> d[a] <span class="op">*</span> d[b]</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> logit_ps(d, xs):</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> d[xs].to_numpy(<span class="bu">float</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    sd <span class="op">=</span> X.std(<span class="dv">0</span>)<span class="op">;</span> sd[sd <span class="op">==</span> <span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.column_stack([np.ones(<span class="bu">len</span>(X)), (X <span class="op">-</span> X.mean(<span class="dv">0</span>)) <span class="op">/</span> sd])   <span class="co"># constant included</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> d.treat.to_numpy()</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> np.zeros(X.shape[<span class="dv">1</span>])</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> expit(X <span class="op">@</span> b)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        step <span class="op">=</span> np.linalg.solve((X <span class="op">*</span> (p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p))[:, <span class="va">None</span>]).T <span class="op">@</span> X <span class="op">+</span> <span class="fl">1e-9</span> <span class="op">*</span> np.eye(<span class="bu">len</span>(b)), X.T <span class="op">@</span> (y <span class="op">-</span> p))</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        b <span class="op">+=</span> step</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.<span class="bu">abs</span>(step).<span class="bu">max</span>() <span class="op">&lt;</span> <span class="fl">1e-10</span>:</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> expit(X <span class="op">@</span> b)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ols_se(d, y, xs, w<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Coefficient and SE on the first regressor (xs[0]); WLS if w is given.&quot;&quot;&quot;</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> d[xs].to_numpy(<span class="bu">float</span>).copy()</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    sd <span class="op">=</span> X[:, <span class="dv">1</span>:].std(<span class="dv">0</span>)<span class="op">;</span> sd[sd <span class="op">==</span> <span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    X[:, <span class="dv">1</span>:] <span class="op">/=</span> sd</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.column_stack([np.ones(<span class="bu">len</span>(d)), X])</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> np.ones(<span class="bu">len</span>(d)) <span class="cf">if</span> w <span class="kw">is</span> <span class="va">None</span> <span class="cf">else</span> np.asarray(w, <span class="bu">float</span>)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    Y <span class="op">=</span> d[y].to_numpy(<span class="bu">float</span>)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> (X <span class="op">*</span> w[:, <span class="va">None</span>]).T <span class="op">@</span> X</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> np.linalg.lstsq(A, (X <span class="op">*</span> w[:, <span class="va">None</span>]).T <span class="op">@</span> Y, rcond<span class="op">=</span><span class="va">None</span>)[<span class="dv">0</span>]</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    e <span class="op">=</span> Y <span class="op">-</span> X <span class="op">@</span> b</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    s2 <span class="op">=</span> (w <span class="op">*</span> e <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>() <span class="op">/</span> (<span class="bu">len</span>(Y) <span class="op">-</span> np.linalg.matrix_rank(X))</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> b[<span class="dv">1</span>], np.sqrt(s2 <span class="op">*</span> np.linalg.pinv(A)[<span class="dv">1</span>, <span class="dv">1</span>])</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> te(b, se):</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f&quot;</span><span class="sc">{</span>b<span class="sc">:,.0f}</span><span class="ss"> (</span><span class="sc">{</span>se<span class="sc">:,.0f}</span><span class="ss">)&quot;</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;treated:&quot;</span>, <span class="bu">len</span>(treated), {g: <span class="bu">len</span>(c) <span class="cf">for</span> g, c <span class="kw">in</span> GROUPS.items()})</span></code></pre></div>
+<pre class="text"><code>treated: 185 {&#39;PSID-1&#39;: 2490, &#39;CPS-1&#39;: 15992, &#39;CPS-3&#39;: 429}</code></pre>
+<h3 id="score-specifications-and-covariate-lists">Score specifications
+and covariate lists</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Table 3, notes (e) and (g), in term notation</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>PAPER_SCORE <span class="op">=</span> {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;PSID-1&quot;</span>: [<span class="st">&quot;age&quot;</span>, <span class="st">&quot;age^2&quot;</span>, <span class="st">&quot;education&quot;</span>, <span class="st">&quot;education^2&quot;</span>, <span class="st">&quot;married&quot;</span>, <span class="st">&quot;nodegree&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;hispanic&quot;</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;re74&quot;</span>, <span class="st">&quot;re75&quot;</span>, <span class="st">&quot;re74^2&quot;</span>, <span class="st">&quot;re75^2&quot;</span>, <span class="st">&quot;black*u74&quot;</span>],</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;CPS-1&quot;</span>:  [<span class="st">&quot;age&quot;</span>, <span class="st">&quot;age^2&quot;</span>, <span class="st">&quot;age^3&quot;</span>, <span class="st">&quot;education&quot;</span>, <span class="st">&quot;education^2&quot;</span>, <span class="st">&quot;married&quot;</span>, <span class="st">&quot;nodegree&quot;</span>, <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;hispanic&quot;</span>, <span class="st">&quot;re74&quot;</span>, <span class="st">&quot;re75&quot;</span>, <span class="st">&quot;u74&quot;</span>, <span class="st">&quot;u75&quot;</span>, <span class="st">&quot;education*re74&quot;</span>],</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>PAPER_SCORE[<span class="st">&quot;CPS-3&quot;</span>] <span class="op">=</span> PAPER_SCORE[<span class="st">&quot;CPS-1&quot;</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>SH_SCORE <span class="op">=</span> {g: [x <span class="cf">for</span> x <span class="kw">in</span> xs <span class="cf">if</span> x <span class="op">!=</span> <span class="st">&quot;nodegree&quot;</span>] <span class="cf">for</span> g, xs <span class="kw">in</span> PAPER_SCORE.items()}</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>REG_A <span class="op">=</span> [<span class="st">&quot;age&quot;</span>, <span class="st">&quot;age^2&quot;</span>, <span class="st">&quot;education&quot;</span>, <span class="st">&quot;nodegree&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;hispanic&quot;</span>, <span class="st">&quot;re74&quot;</span>, <span class="st">&quot;re75&quot;</span>]   <span class="co"># footnote (a)</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>BAL   <span class="op">=</span> [<span class="st">&quot;age&quot;</span>, <span class="st">&quot;education&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;hispanic&quot;</span>, <span class="st">&quot;nodegree&quot;</span>, <span class="st">&quot;married&quot;</span>, <span class="st">&quot;re74&quot;</span>, <span class="st">&quot;re75&quot;</span>, <span class="st">&quot;u74&quot;</span>, <span class="st">&quot;u75&quot;</span>]</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pool(comp, xs, t<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Stack treated + comparison units, create the needed terms, attach the score.&quot;&quot;&quot;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> treated <span class="cf">if</span> t <span class="kw">is</span> <span class="va">None</span> <span class="cf">else</span> t</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> pd.concat([t, comp], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> add_terms(d, <span class="bu">sorted</span>(<span class="bu">set</span>(xs <span class="op">+</span> REG_A)))</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    d[<span class="st">&quot;ps&quot;</span>] <span class="op">=</span> logit_ps(d, xs)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> support(d):</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    pt <span class="op">=</span> d.ps[d.treat <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d[(d.treat <span class="op">==</span> <span class="dv">1</span>) <span class="op">|</span> ((d.ps <span class="op">&gt;=</span> pt.<span class="bu">min</span>()) <span class="op">&amp;</span> (d.ps <span class="op">&lt;=</span> pt.<span class="bu">max</span>()))]</span></code></pre></div>
+<h3 id="strata-rules-and-estimators">Strata rules and estimators</h3>
+<ul>
+<li><code>strata_reproduction</code> and <code>strata_sh</code> are the
+two splitting rules described above.</li>
+<li><code>t_stat</code> is the two-sample t-statistic used by both rules
+and by the balance tests.</li>
+<li><code>stratify</code> gives columns (4) and (5).</li>
+<li><code>match_nn</code> gives each comparison unit’s weight: the
+number of times it is used as a nearest neighbor.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> t_stat(g, v):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    a, b <span class="op">=</span> g[g.treat <span class="op">==</span> <span class="dv">1</span>][v], g[g.treat <span class="op">==</span> <span class="dv">0</span>][v]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(a) <span class="op">&lt;</span> <span class="dv">2</span> <span class="kw">or</span> <span class="bu">len</span>(b) <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">0.0</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    se <span class="op">=</span> np.sqrt(a.var() <span class="op">/</span> <span class="bu">len</span>(a) <span class="op">+</span> b.var() <span class="op">/</span> <span class="bu">len</span>(b))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.0</span> <span class="cf">if</span> se <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> (a.mean() <span class="op">-</span> b.mean()) <span class="op">/</span> se</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> in_block(s, a, b):</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s[(s.ps <span class="op">&gt;=</span> a) <span class="op">&amp;</span> ((s.ps <span class="op">&lt;</span> b) <span class="cf">if</span> b <span class="op">&lt;</span> <span class="dv">1</span> <span class="cf">else</span> (s.ps <span class="op">&lt;=</span> b))]</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> merge_one_sided(s, blocks):</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Merge a block with treated but no comparison units into its neighbor.&quot;&quot;&quot;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> []</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> a, b <span class="kw">in</span> blocks:</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        g <span class="op">=</span> in_block(s, a, b)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> out <span class="kw">and</span> (g.treat <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>() <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> (g.treat <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>() <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            out[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> (out[<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>], b)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            out.append((a, b))</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">len</span>(out) <span class="op">&gt;</span> <span class="dv">1</span> <span class="kw">and</span> (in_block(s, <span class="op">*</span>out[<span class="dv">0</span>]).treat <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>() <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        out[:<span class="dv">2</span>] <span class="op">=</span> [(out[<span class="dv">0</span>][<span class="dv">0</span>], out[<span class="dv">1</span>][<span class="dv">1</span>])]</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> strata_reproduction(s, min_n<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Appendix rule: split when the score or any covariate differs; halves need &gt;= min_n of each group.&quot;&quot;&quot;</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    lo, hi <span class="op">=</span> s.ps.<span class="bu">min</span>(), <span class="fl">1.0</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    edges <span class="op">=</span> <span class="bu">sorted</span>({lo, hi, <span class="op">*</span>[e <span class="cf">for</span> e <span class="kw">in</span> (<span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>) <span class="cf">if</span> lo <span class="op">&lt;</span> e <span class="op">&lt;</span> hi]})</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    todo, done <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(edges[:<span class="op">-</span><span class="dv">1</span>], edges[<span class="dv">1</span>:])), []</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> todo:</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        a, b <span class="op">=</span> todo.pop()</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        g <span class="op">=</span> in_block(s, a, b)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        bad <span class="op">=</span> <span class="bu">any</span>(<span class="bu">abs</span>(t_stat(g, v)) <span class="op">&gt;</span> <span class="fl">1.96</span> <span class="cf">for</span> v <span class="kw">in</span> [<span class="st">&quot;ps&quot;</span>] <span class="op">+</span> BAL)</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> bad <span class="kw">and</span> (g.treat <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>() <span class="op">&gt;=</span> <span class="dv">2</span> <span class="kw">and</span> (g.treat <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>() <span class="op">&gt;=</span> <span class="dv">2</span>:</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>            m <span class="op">=</span> (a <span class="op">+</span> b) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>            L, R <span class="op">=</span> in_block(s, a, m), in_block(s, m, b)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">min</span>((L.treat <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>(), (L.treat <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>(), (R.treat <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>(), (R.treat <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>()) <span class="op">&gt;=</span> min_n:</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>                todo <span class="op">+=</span> [(a, m), (m, b)]</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        done.append((a, b))</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> merge_one_sided(s, <span class="bu">sorted</span>(x <span class="cf">for</span> x <span class="kw">in</span> done <span class="cf">if</span> <span class="bu">len</span>(in_block(s, <span class="op">*</span>x))))</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> strata_sh(s):</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;SH&#39;s rule: 5 equal-width blocks on [0,1]; split while the mean score differs.&quot;&quot;&quot;</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    todo, done <span class="op">=</span> [(i <span class="op">/</span> <span class="dv">5</span>, (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">5</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)], []</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> todo:</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>        a, b <span class="op">=</span> todo.pop()</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>        g <span class="op">=</span> in_block(s, a, b)</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (g.treat <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>() <span class="op">&gt;=</span> <span class="dv">2</span> <span class="kw">and</span> (g.treat <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>() <span class="op">&gt;=</span> <span class="dv">2</span> <span class="kw">and</span> <span class="bu">abs</span>(t_stat(g, <span class="st">&quot;ps&quot;</span>)) <span class="op">&gt;</span> <span class="fl">1.96</span> <span class="kw">and</span> b <span class="op">-</span> a <span class="op">&gt;</span> <span class="fl">1e-6</span>:</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>            m <span class="op">=</span> (a <span class="op">+</span> b) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>            todo <span class="op">+=</span> [(a, m), (m, b)]</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>        done.append((a, b))</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> merge_one_sided(s, <span class="bu">sorted</span>(x <span class="cf">for</span> x <span class="kw">in</span> done <span class="cf">if</span> <span class="bu">len</span>(in_block(s, <span class="op">*</span>x))))</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> stratify(s, blocks, regx):</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>    n1 <span class="op">=</span> (s.treat <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>()</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>    e4 <span class="op">=</span> v4 <span class="op">=</span> e5 <span class="op">=</span> v5 <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> a, b <span class="kw">in</span> blocks:</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>        g <span class="op">=</span> in_block(s, a, b)</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>        t, c <span class="op">=</span> g[g.treat <span class="op">==</span> <span class="dv">1</span>], g[g.treat <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(t) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>        w <span class="op">=</span> <span class="bu">len</span>(t) <span class="op">/</span> n1</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>        d4 <span class="op">=</span> t.re78.mean() <span class="op">-</span> c.re78.mean()</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>        var4 <span class="op">=</span> np.nan_to_num(t.re78.var() <span class="op">/</span> <span class="bu">len</span>(t)) <span class="op">+</span> np.nan_to_num(c.re78.var() <span class="op">/</span> <span class="bu">len</span>(c))</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(g) <span class="op">&gt;</span> <span class="bu">len</span>(regx) <span class="op">+</span> <span class="dv">3</span>:</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>            d5, se5 <span class="op">=</span> ols_se(g, <span class="st">&quot;re78&quot;</span>, [<span class="st">&quot;treat&quot;</span>] <span class="op">+</span> regx)</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:                                         <span class="co"># too few units for the regression</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>            d5, se5 <span class="op">=</span> d4, np.sqrt(var4)</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>        e4 <span class="op">+=</span> w <span class="op">*</span> d4<span class="op">;</span> v4 <span class="op">+=</span> w <span class="op">*</span> w <span class="op">*</span> var4</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>        e5 <span class="op">+=</span> w <span class="op">*</span> d5<span class="op">;</span> v5 <span class="op">+=</span> w <span class="op">*</span> w <span class="op">*</span> se5 <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (e4, np.sqrt(v4)), (e5, np.sqrt(v5))</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> match_nn(d):</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>    t, c <span class="op">=</span> d[d.treat <span class="op">==</span> <span class="dv">1</span>], d[d.treat <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    pc <span class="op">=</span> c.ps.to_numpy()</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> np.zeros(<span class="bu">len</span>(pc))</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> t.ps:</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>        w[np.<span class="bu">abs</span>(pc <span class="op">-</span> p).argmin()] <span class="op">+=</span> <span class="dv">1</span>                <span class="co"># argmin: first unit in data order on ties</span></span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> w</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matching(d, regx):</span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>    t, c <span class="op">=</span> d[d.treat <span class="op">==</span> <span class="dv">1</span>], d[d.treat <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> match_nn(d)</span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>    att <span class="op">=</span> t.re78.mean() <span class="op">-</span> (w <span class="op">@</span> c.re78.to_numpy()) <span class="op">/</span> <span class="bu">len</span>(t)</span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> w <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>    dm <span class="op">=</span> pd.concat([t, c[u]])</span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>    reg <span class="op">=</span> ols_se(dm, <span class="st">&quot;re78&quot;</span>, [<span class="st">&quot;treat&quot;</span>] <span class="op">+</span> regx, np.r_[np.ones(<span class="bu">len</span>(t)), w[u]])[<span class="dv">0</span>]</span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> att, reg, w</span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> boot_matching(comp, xs, regx, reps<span class="op">=</span>REPS, seed<span class="op">=</span>SEED):</span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>    rng <span class="op">=</span> np.random.default_rng(seed)</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>    draws <span class="op">=</span> []</span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(reps):</span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a>        tb <span class="op">=</span> treated.iloc[rng.integers(<span class="dv">0</span>, <span class="bu">len</span>(treated), <span class="bu">len</span>(treated))]</span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>        cb <span class="op">=</span> comp.iloc[rng.integers(<span class="dv">0</span>, <span class="bu">len</span>(comp), <span class="bu">len</span>(comp))]</span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>        draws.append(matching(pool(cb, xs, tb), regx)[:<span class="dv">2</span>])</span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.std(draws, axis<span class="op">=</span><span class="dv">0</span>, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> table3_row(g, xs, strata_rule, regx<span class="op">=</span>REG_A):</span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>    comp <span class="op">=</span> GROUPS[g]</span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> pool(comp, xs)</span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> support(d)</span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>    blocks <span class="op">=</span> strata_rule(s)</span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>    (e4, s4), (e5, s5) <span class="op">=</span> stratify(s, blocks, regx)</span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>    b3, se3 <span class="op">=</span> ols_se(s.assign(ps2<span class="op">=</span>s.ps <span class="op">**</span> <span class="dv">2</span>), <span class="st">&quot;re78&quot;</span>, [<span class="st">&quot;treat&quot;</span>, <span class="st">&quot;ps&quot;</span>, <span class="st">&quot;ps2&quot;</span>])</span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>    att, reg, w <span class="op">=</span> matching(d, regx)</span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>    se <span class="op">=</span> boot_matching(comp, xs, regx)</span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>    row <span class="op">=</span> {<span class="st">&quot;(1)&quot;</span>: te(<span class="op">*</span>ols_se(d, <span class="st">&quot;re78&quot;</span>, [<span class="st">&quot;treat&quot;</span>])), <span class="st">&quot;(2)&quot;</span>: te(<span class="op">*</span>ols_se(d, <span class="st">&quot;re78&quot;</span>, [<span class="st">&quot;treat&quot;</span>] <span class="op">+</span> REG_A)),</span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;(3)&quot;</span>: te(b3, se3), <span class="st">&quot;(4)&quot;</span>: te(e4, s4), <span class="st">&quot;(5)&quot;</span>: te(e5, s5), <span class="st">&quot;(6)&quot;</span>: <span class="ss">f&quot;</span><span class="sc">{</span><span class="bu">len</span>(s)<span class="sc">:,}</span><span class="ss">&quot;</span>,</span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;(7)&quot;</span>: te(att, se[<span class="dv">0</span>]), <span class="st">&quot;(8)&quot;</span>: te(reg, se[<span class="dv">1</span>])}</span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> row, {<span class="st">&quot;d&quot;</span>: d, <span class="st">&quot;s&quot;</span>: s, <span class="st">&quot;blocks&quot;</span>: blocks, <span class="st">&quot;w&quot;</span>: w}</span></code></pre></div>
+<h1 id="part-1.-tables-3-and-4">Part 1. Tables 3 and 4</h1>
+<h2 id="table-3-estimated-training-effects">Table 3: estimated training
+effects</h2>
+<p>For each group: <strong>(i) Paper / (ii) Reproduction / (iii)
+SH</strong>. The NSW row is the experimental benchmark.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>PAPER_T3 <span class="op">=</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;PSID-1&quot;</span>: [<span class="st">&quot;-15,205 (1,154)&quot;</span>, <span class="st">&quot;731 (886)&quot;</span>, <span class="st">&quot;294 (1,389)&quot;</span>, <span class="st">&quot;1,608 (1,571)&quot;</span>, <span class="st">&quot;1,494 (1,581)&quot;</span>, <span class="st">&quot;1,255&quot;</span>, <span class="st">&quot;1,691 (2,209)&quot;</span>, <span class="st">&quot;1,473 (809)&quot;</span>],</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;CPS-1&quot;</span>:  [<span class="st">&quot;-8,498 (712)&quot;</span>, <span class="st">&quot;972 (550)&quot;</span>, <span class="st">&quot;1,117 (747)&quot;</span>, <span class="st">&quot;1,713 (1,115)&quot;</span>, <span class="st">&quot;1,774 (1,152)&quot;</span>, <span class="st">&quot;4,117&quot;</span>, <span class="st">&quot;1,582 (1,069)&quot;</span>, <span class="st">&quot;1,616 (751)&quot;</span>],</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;CPS-3&quot;</span>:  [<span class="st">&quot;-635 (657)&quot;</span>, <span class="st">&quot;1,326 (798)&quot;</span>, <span class="st">&quot;556 (951)&quot;</span>, <span class="st">&quot;1,252 (1,617)&quot;</span>, <span class="st">&quot;2,219 (2,082)&quot;</span>, <span class="st">&quot;514&quot;</span>, <span class="st">&quot;587 (1,496)&quot;</span>, <span class="st">&quot;662 (776)&quot;</span>],</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>COLS <span class="op">=</span> [<span class="st">&quot;(1)&quot;</span>, <span class="st">&quot;(2)&quot;</span>, <span class="st">&quot;(3)&quot;</span>, <span class="st">&quot;(4)&quot;</span>, <span class="st">&quot;(5)&quot;</span>, <span class="st">&quot;(6)&quot;</span>, <span class="st">&quot;(7)&quot;</span>, <span class="st">&quot;(8)&quot;</span>]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>SETUPS <span class="op">=</span> {<span class="st">&quot;(ii) Reproduction&quot;</span>: (PAPER_SCORE, strata_reproduction),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;(iii) SH&quot;</span>:          (SH_SCORE,    strata_sh)}</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>nsw_a <span class="op">=</span> add_terms(nsw.copy(), REG_A)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> {(<span class="st">&quot;NSW&quot;</span>, <span class="st">&quot;(i) Paper&quot;</span>): [<span class="st">&quot;1,794 (633)&quot;</span>, <span class="st">&quot;1,672 (638)&quot;</span>] <span class="op">+</span> [<span class="st">&quot;&quot;</span>] <span class="op">*</span> <span class="dv">6</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        (<span class="st">&quot;NSW&quot;</span>, <span class="st">&quot;(ii) Reproduction&quot;</span>): [te(<span class="op">*</span>ols_se(nsw_a, <span class="st">&quot;re78&quot;</span>, [<span class="st">&quot;treat&quot;</span>])),</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                                       te(<span class="op">*</span>ols_se(nsw_a, <span class="st">&quot;re78&quot;</span>, [<span class="st">&quot;treat&quot;</span>] <span class="op">+</span> REG_A))] <span class="op">+</span> [<span class="st">&quot;&quot;</span>] <span class="op">*</span> <span class="dv">6</span>}</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {}</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> g <span class="kw">in</span> GROUPS:</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    rows[(g, <span class="st">&quot;(i) Paper&quot;</span>)] <span class="op">=</span> PAPER_T3[g]</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> label, (scores, rule) <span class="kw">in</span> SETUPS.items():</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        r, results[(g, label)] <span class="op">=</span> table3_row(g, scores[g], rule)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        rows[(g, label)] <span class="op">=</span> [r[c] <span class="cf">for</span> c <span class="kw">in</span> COLS]</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>table3 <span class="op">=</span> pd.DataFrame(rows, index<span class="op">=</span>COLS).T</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>table3</span></code></pre></div>
+<div class="table-wrap">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>(1)</th>
+      <th>(2)</th>
+      <th>(3)</th>
+      <th>(4)</th>
+      <th>(5)</th>
+      <th>(6)</th>
+      <th>(7)</th>
+      <th>(8)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">NSW</th>
+      <th>(i) Paper</th>
+      <td>1,794 (633)</td>
+      <td>1,672 (638)</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>(ii) Reproduction</th>
+      <td>1,794 (633)</td>
+      <td>1,672 (638)</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">PSID-1</th>
+      <th>(i) Paper</th>
+      <td>-15,205 (1,154)</td>
+      <td>731 (886)</td>
+      <td>294 (1,389)</td>
+      <td>1,608 (1,571)</td>
+      <td>1,494 (1,581)</td>
+      <td>1,255</td>
+      <td>1,691 (2,209)</td>
+      <td>1,473 (809)</td>
+    </tr>
+    <tr>
+      <th>(ii) Reproduction</th>
+      <td>-15,205 (1,155)</td>
+      <td>218 (866)</td>
+      <td>265 (1,387)</td>
+      <td>2,154 (790)</td>
+      <td>2,492 (1,894)</td>
+      <td>1,331</td>
+      <td>552 (1,924)</td>
+      <td>495 (1,590)</td>
+    </tr>
+    <tr>
+      <th>(iii) SH</th>
+      <td>-15,205 (1,155)</td>
+      <td>218 (866)</td>
+      <td>286 (1,388)</td>
+      <td>1,039 (918)</td>
+      <td>1,072 (1,336)</td>
+      <td>1,342</td>
+      <td>1,691 (1,997)</td>
+      <td>1,674 (1,316)</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">CPS-1</th>
+      <th>(i) Paper</th>
+      <td>-8,498 (712)</td>
+      <td>972 (550)</td>
+      <td>1,117 (747)</td>
+      <td>1,713 (1,115)</td>
+      <td>1,774 (1,152)</td>
+      <td>4,117</td>
+      <td>1,582 (1,069)</td>
+      <td>1,616 (751)</td>
+    </tr>
+    <tr>
+      <th>(ii) Reproduction</th>
+      <td>-8,498 (712)</td>
+      <td>739 (547)</td>
+      <td>1,071 (762)</td>
+      <td>1,564 (733)</td>
+      <td>1,781 (1,050)</td>
+      <td>4,041</td>
+      <td>952 (925)</td>
+      <td>1,098 (916)</td>
+    </tr>
+    <tr>
+      <th>(iii) SH</th>
+      <td>-8,498 (712)</td>
+      <td>739 (547)</td>
+      <td>1,109 (747)</td>
+      <td>1,833 (675)</td>
+      <td>1,877 (1,033)</td>
+      <td>3,566</td>
+      <td>1,582 (909)</td>
+      <td>1,565 (884)</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">CPS-3</th>
+      <th>(i) Paper</th>
+      <td>-635 (657)</td>
+      <td>1,326 (798)</td>
+      <td>556 (951)</td>
+      <td>1,252 (1,617)</td>
+      <td>2,219 (2,082)</td>
+      <td>514</td>
+      <td>587 (1,496)</td>
+      <td>662 (776)</td>
+    </tr>
+    <tr>
+      <th>(ii) Reproduction</th>
+      <td>-635 (657)</td>
+      <td>1,326 (796)</td>
+      <td>625 (950)</td>
+      <td>1,587 (884)</td>
+      <td>1,434 (1,869)</td>
+      <td>506</td>
+      <td>-467 (1,182)</td>
+      <td>-419 (1,100)</td>
+    </tr>
+    <tr>
+      <th>(iii) SH</th>
+      <td>-635 (657)</td>
+      <td>1,326 (796)</td>
+      <td>649 (950)</td>
+      <td>1,211 (936)</td>
+      <td>1,541 (1,655)</td>
+      <td>515</td>
+      <td>587 (1,152)</td>
+      <td>777 (1,118)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p><strong>Reading Table 3:</strong></p>
+<ul>
+<li><strong>Matching, column (7):</strong> SH reproduces the paper
+exactly for all three groups. Reproduction does not.</li>
+<li><strong>Column (8):</strong> under SH it is close to the paper, and
+exact only with the linear covariate set (see above).</li>
+<li><strong>Stratification, columns (3)–(6):</strong> neither version
+reproduces the paper. The column (6) sample differs, and the paper’s
+strata are not published.</li>
+<li><strong>Column (2):</strong> the paper’s PSID-1 and CPS-1 values
+(731, 972) do not follow its own footnote (a), which gives 218 and
+739.</li>
+</ul>
+<h2 id="table-4-matched-comparison-samples">Table 4: matched comparison
+samples</h2>
+<p>Means of the matched comparison units, <strong>weighted by the number
+of times each unit is matched</strong>; that is how the paper’s means
+reproduce. <code>N</code> = distinct matched comparison units.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>T4 <span class="op">=</span> [<span class="st">&quot;age&quot;</span>, <span class="st">&quot;education&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;hispanic&quot;</span>, <span class="st">&quot;nodegree&quot;</span>, <span class="st">&quot;married&quot;</span>, <span class="st">&quot;re74&quot;</span>, <span class="st">&quot;re75&quot;</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>T4_LAB <span class="op">=</span> [<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Education&quot;</span>, <span class="st">&quot;Black&quot;</span>, <span class="st">&quot;Hispanic&quot;</span>, <span class="st">&quot;No degree&quot;</span>, <span class="st">&quot;Married&quot;</span>, <span class="st">&quot;RE74&quot;</span>, <span class="st">&quot;RE75&quot;</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>PAPER_T4 <span class="op">=</span> {   <span class="co"># means only, transcribed from Table 4</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;PSID-1&quot;</span>: [<span class="dv">56</span>, <span class="fl">26.39</span>, <span class="fl">10.62</span>, <span class="fl">.86</span>, <span class="fl">.02</span>, <span class="fl">.55</span>, <span class="fl">.15</span>, <span class="dv">1794</span>, <span class="dv">1126</span>],</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;CPS-1&quot;</span>:  [<span class="dv">119</span>, <span class="fl">26.91</span>, <span class="fl">10.52</span>, <span class="fl">.86</span>, <span class="fl">.04</span>, <span class="fl">.64</span>, <span class="fl">.19</span>, <span class="dv">2110</span>, <span class="dv">1396</span>],</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;CPS-3&quot;</span>:  [<span class="dv">63</span>, <span class="fl">25.94</span>, <span class="fl">10.69</span>, <span class="fl">.87</span>, <span class="fl">.06</span>, <span class="fl">.53</span>, <span class="fl">.13</span>, <span class="dv">2709</span>, <span class="dv">1587</span>],</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fmt(v, x):</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f&quot;</span><span class="sc">{</span>x<span class="sc">:,.0f}</span><span class="ss">&quot;</span> <span class="cf">if</span> v.startswith(<span class="st">&quot;re&quot;</span>) <span class="cf">else</span> <span class="ss">f&quot;</span><span class="sc">{</span>x<span class="sc">:.2f}</span><span class="ss">&quot;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matched_means(info):</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    d, w <span class="op">=</span> info[<span class="st">&quot;d&quot;</span>], info[<span class="st">&quot;w&quot;</span>]</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> d[d.treat <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> w <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [<span class="bu">int</span>(u.<span class="bu">sum</span>())] <span class="op">+</span> [np.average(c[v][u], weights<span class="op">=</span>w[u]) <span class="cf">for</span> v <span class="kw">in</span> T4]</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>rows4 <span class="op">=</span> {(<span class="st">&quot;NSW treated&quot;</span>, <span class="st">&quot;&quot;</span>): [<span class="dv">185</span>] <span class="op">+</span> [fmt(v, treated[v].mean()) <span class="cf">for</span> v <span class="kw">in</span> T4]}</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> g <span class="kw">in</span> GROUPS:</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> PAPER_T4[g]</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    rows4[(<span class="st">&quot;M&quot;</span> <span class="op">+</span> g, <span class="st">&quot;(i) Paper&quot;</span>)] <span class="op">=</span> [p[<span class="dv">0</span>]] <span class="op">+</span> [fmt(v, x) <span class="cf">for</span> v, x <span class="kw">in</span> <span class="bu">zip</span>(T4, p[<span class="dv">1</span>:])]</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> label <span class="kw">in</span> SETUPS:</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> matched_means(results[(g, label)])</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>        rows4[(<span class="st">&quot;M&quot;</span> <span class="op">+</span> g, label)] <span class="op">=</span> [m[<span class="dv">0</span>]] <span class="op">+</span> [fmt(v, x) <span class="cf">for</span> v, x <span class="kw">in</span> <span class="bu">zip</span>(T4, m[<span class="dv">1</span>:])]</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>table4 <span class="op">=</span> pd.DataFrame(rows4, index<span class="op">=</span>[<span class="st">&quot;N&quot;</span>] <span class="op">+</span> T4_LAB).T</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>table4</span></code></pre></div>
+<div class="table-wrap">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>N</th>
+      <th>Age</th>
+      <th>Education</th>
+      <th>Black</th>
+      <th>Hispanic</th>
+      <th>No degree</th>
+      <th>Married</th>
+      <th>RE74</th>
+      <th>RE75</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>NSW treated</th>
+      <th></th>
+      <td>185</td>
+      <td>25.82</td>
+      <td>10.35</td>
+      <td>0.84</td>
+      <td>0.06</td>
+      <td>0.71</td>
+      <td>0.19</td>
+      <td>2,096</td>
+      <td>1,532</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">MPSID-1</th>
+      <th>(i) Paper</th>
+      <td>56</td>
+      <td>26.39</td>
+      <td>10.62</td>
+      <td>0.86</td>
+      <td>0.02</td>
+      <td>0.55</td>
+      <td>0.15</td>
+      <td>1,794</td>
+      <td>1,126</td>
+    </tr>
+    <tr>
+      <th>(ii) Reproduction</th>
+      <td>55</td>
+      <td>26.13</td>
+      <td>10.31</td>
+      <td>0.92</td>
+      <td>0.01</td>
+      <td>0.56</td>
+      <td>0.16</td>
+      <td>1,873</td>
+      <td>1,528</td>
+    </tr>
+    <tr>
+      <th>(iii) SH</th>
+      <td>52</td>
+      <td>26.39</td>
+      <td>10.63</td>
+      <td>0.86</td>
+      <td>0.02</td>
+      <td>0.55</td>
+      <td>0.15</td>
+      <td>1,794</td>
+      <td>1,126</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">MCPS-1</th>
+      <th>(i) Paper</th>
+      <td>119</td>
+      <td>26.91</td>
+      <td>10.52</td>
+      <td>0.86</td>
+      <td>0.04</td>
+      <td>0.64</td>
+      <td>0.19</td>
+      <td>2,110</td>
+      <td>1,396</td>
+    </tr>
+    <tr>
+      <th>(ii) Reproduction</th>
+      <td>106</td>
+      <td>25.66</td>
+      <td>10.80</td>
+      <td>0.88</td>
+      <td>0.03</td>
+      <td>0.59</td>
+      <td>0.18</td>
+      <td>1,839</td>
+      <td>1,475</td>
+    </tr>
+    <tr>
+      <th>(iii) SH</th>
+      <td>112</td>
+      <td>26.91</td>
+      <td>10.52</td>
+      <td>0.86</td>
+      <td>0.04</td>
+      <td>0.64</td>
+      <td>0.19</td>
+      <td>2,110</td>
+      <td>1,396</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">MCPS-3</th>
+      <th>(i) Paper</th>
+      <td>63</td>
+      <td>25.94</td>
+      <td>10.69</td>
+      <td>0.87</td>
+      <td>0.06</td>
+      <td>0.53</td>
+      <td>0.13</td>
+      <td>2,709</td>
+      <td>1,587</td>
+    </tr>
+    <tr>
+      <th>(ii) Reproduction</th>
+      <td>63</td>
+      <td>25.49</td>
+      <td>10.50</td>
+      <td>0.89</td>
+      <td>0.05</td>
+      <td>0.68</td>
+      <td>0.16</td>
+      <td>1,771</td>
+      <td>1,666</td>
+    </tr>
+    <tr>
+      <th>(iii) SH</th>
+      <td>64</td>
+      <td>25.95</td>
+      <td>10.69</td>
+      <td>0.87</td>
+      <td>0.06</td>
+      <td>0.53</td>
+      <td>0.13</td>
+      <td>2,709</td>
+      <td>1,587</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>Under SH, every mean equals the paper’s to rounding. The paper’s
+<code>N</code> (56 / 119 / 63) does not match the number of distinct
+matched units (52 / 112 / 64).</p>
+<h3 id="covariate-balance-for-matching">Covariate balance for
+matching</h3>
+<p>For each covariate, the standardized difference between the NSW
+treated and the matched comparison sample:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mn>100</mn><mo>⋅</mo><mfrac><mrow><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mi>T</mi></msub><mo>−</mo><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mrow><mi>C</mi><mo>,</mo><mtext mathvariant="normal">matched</mtext></mrow></msub></mrow><msqrt><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>s</mi><mi>T</mi><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>s</mi><mi>C</mi><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn></mrow></msqrt></mfrac></mrow><annotation encoding="application/x-tex">d = 100\cdot\frac{\bar x_T-\bar x_{C,\text{matched}}}{\sqrt{(s_T^2+s_C^2)/2}}</annotation></semantics></math></p>
+<p>Here
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>s</mi><mi>T</mi><mn>2</mn></msubsup><annotation encoding="application/x-tex">s_T^2</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>s</mi><mi>C</mi><mn>2</mn></msubsup><annotation encoding="application/x-tex">s_C^2</annotation></semantics></math>
+are the variances in the full treated and full comparison samples.
+<strong>Balanced</strong> means
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>d</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>&lt;</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">|d|&lt;10</annotation></semantics></math>
+for every covariate.</p>
+<ul>
+<li><strong>(i) Paper:</strong> uses the matched means printed in Table
+4. Only the 8 covariates in that table are available; u74 and u75 are
+not reported.</li>
+<li><strong>(ii) Reproduction and (iii) SH:</strong> use our matched
+samples, for all 10 covariates.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> std_diff(xbar_c, v, comp):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">100</span> <span class="op">*</span> (treated[v].mean() <span class="op">-</span> xbar_c) <span class="op">/</span> np.sqrt((treated[v].var() <span class="op">+</span> comp[v].var()) <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matching_balance(g, label):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    comp <span class="op">=</span> GROUPS[g]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> label <span class="op">==</span> <span class="st">&quot;(i) Paper&quot;</span>:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> {v: std_diff(x, v, comp) <span class="cf">for</span> v, x <span class="kw">in</span> <span class="bu">zip</span>(T4, PAPER_T4[g][<span class="dv">1</span>:])}</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    info <span class="op">=</span> results[(g, label)]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    d, w <span class="op">=</span> info[<span class="st">&quot;d&quot;</span>], info[<span class="st">&quot;w&quot;</span>]</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> d[d.treat <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> w <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {v: std_diff(np.average(c[v][u], weights<span class="op">=</span>w[u]), v, comp) <span class="cf">for</span> v <span class="kw">in</span> BAL}</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>LABELS <span class="op">=</span> [<span class="st">&quot;(i) Paper&quot;</span>, <span class="st">&quot;(ii) Reproduction&quot;</span>, <span class="st">&quot;(iii) SH&quot;</span>]</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>mbal <span class="op">=</span> pd.DataFrame({(g, lab): matching_balance(g, lab) <span class="cf">for</span> g <span class="kw">in</span> GROUPS <span class="cf">for</span> lab <span class="kw">in</span> LABELS}).reindex(BAL)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Standardized differences after matching (%); |d| &gt;= 10 is flagged in the summary below&quot;</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>mbal.<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div>
+<pre class="text"><code>Standardized differences after matching (%); |d| &gt;= 10 is flagged in the summary below</code></pre>
+<div class="table-wrap">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3" halign="left">PSID-1</th>
+      <th colspan="3" halign="left">CPS-1</th>
+      <th colspan="3" halign="left">CPS-3</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>(i) Paper</th>
+      <th>(ii) Reproduction</th>
+      <th>(iii) SH</th>
+      <th>(i) Paper</th>
+      <th>(ii) Reproduction</th>
+      <th>(iii) SH</th>
+      <th>(i) Paper</th>
+      <th>(ii) Reproduction</th>
+      <th>(iii) SH</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>age</th>
+      <td>-6.4</td>
+      <td>-3.5</td>
+      <td>-6.4</td>
+      <td>-11.8</td>
+      <td>1.7</td>
+      <td>-11.7</td>
+      <td>-1.4</td>
+      <td>3.6</td>
+      <td>-1.4</td>
+    </tr>
+    <tr>
+      <th>education</th>
+      <td>-10.5</td>
+      <td>1.5</td>
+      <td>-10.8</td>
+      <td>-7.0</td>
+      <td>-18.3</td>
+      <td>-7.0</td>
+      <td>-13.9</td>
+      <td>-6.3</td>
+      <td>-14.0</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>-4.2</td>
+      <td>-20.2</td>
+      <td>-5.4</td>
+      <td>-5.3</td>
+      <td>-10.2</td>
+      <td>-6.8</td>
+      <td>-7.0</td>
+      <td>-11.3</td>
+      <td>-7.0</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>18.8</td>
+      <td>25.8</td>
+      <td>20.6</td>
+      <td>7.8</td>
+      <td>13.1</td>
+      <td>8.7</td>
+      <td>-0.2</td>
+      <td>1.8</td>
+      <td>-1.8</td>
+    </tr>
+    <tr>
+      <th>nodegree</th>
+      <td>34.5</td>
+      <td>31.8</td>
+      <td>35.4</td>
+      <td>14.9</td>
+      <td>24.9</td>
+      <td>14.2</td>
+      <td>37.6</td>
+      <td>5.7</td>
+      <td>37.6</td>
+    </tr>
+    <tr>
+      <th>married</th>
+      <td>10.7</td>
+      <td>7.4</td>
+      <td>10.3</td>
+      <td>-0.2</td>
+      <td>1.3</td>
+      <td>-1.3</td>
+      <td>13.2</td>
+      <td>6.0</td>
+      <td>13.2</td>
+    </tr>
+    <tr>
+      <th>re74</th>
+      <td>3.0</td>
+      <td>2.2</td>
+      <td>3.0</td>
+      <td>-0.2</td>
+      <td>3.4</td>
+      <td>-0.2</td>
+      <td>-10.4</td>
+      <td>5.5</td>
+      <td>-10.4</td>
+    </tr>
+    <tr>
+      <th>re75</th>
+      <td>4.1</td>
+      <td>0.0</td>
+      <td>4.1</td>
+      <td>2.0</td>
+      <td>0.8</td>
+      <td>2.0</td>
+      <td>-1.7</td>
+      <td>-4.1</td>
+      <td>-1.7</td>
+    </tr>
+    <tr>
+      <th>u74</th>
+      <td>NaN</td>
+      <td>21.4</td>
+      <td>14.3</td>
+      <td>NaN</td>
+      <td>-15.0</td>
+      <td>-5.5</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>10.9</td>
+    </tr>
+    <tr>
+      <th>u75</th>
+      <td>NaN</td>
+      <td>1.3</td>
+      <td>-18.6</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>-1.3</td>
+      <td>NaN</td>
+      <td>-14.7</td>
+      <td>4.5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> {}</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (g, lab), col <span class="kw">in</span> mbal.items():</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> col.dropna()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    bad <span class="op">=</span> col[col.<span class="bu">abs</span>() <span class="op">&gt;=</span> <span class="dv">10</span>]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    summary[(g, lab)] <span class="op">=</span> {<span class="st">&quot;max |d|&quot;</span>: <span class="bu">round</span>(col.<span class="bu">abs</span>().<span class="bu">max</span>(), <span class="dv">1</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;covariates with |d| &gt;= 10&quot;</span>: <span class="st">&quot;, &quot;</span>.join(<span class="ss">f&quot;</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>v<span class="sc">:.0f}</span><span class="ss">)&quot;</span> <span class="cf">for</span> k, v <span class="kw">in</span> bad.items()) <span class="kw">or</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;balanced?&quot;</span>: <span class="st">&quot;yes&quot;</span> <span class="cf">if</span> bad.empty <span class="cf">else</span> <span class="st">&quot;no&quot;</span>}</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(summary).T</span></code></pre></div>
+<div class="table-wrap">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>max |d|</th>
+      <th>covariates with |d| &gt;= 10</th>
+      <th>balanced?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">PSID-1</th>
+      <th>(i) Paper</th>
+      <td>34.5</td>
+      <td>education (-11), hispanic (19), nodegree (35), married (11)</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>(ii) Reproduction</th>
+      <td>31.8</td>
+      <td>black (-20), hispanic (26), nodegree (32), u74 (21)</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>(iii) SH</th>
+      <td>35.4</td>
+      <td>education (-11), hispanic (21), nodegree (35), married (10), u74 (14), u75 (-19)</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">CPS-1</th>
+      <th>(i) Paper</th>
+      <td>14.9</td>
+      <td>age (-12), nodegree (15)</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>(ii) Reproduction</th>
+      <td>24.9</td>
+      <td>education (-18), black (-10), hispanic (13), nodegree (25), u74 (-15)</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>(iii) SH</th>
+      <td>14.2</td>
+      <td>age (-12), nodegree (14)</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">CPS-3</th>
+      <th>(i) Paper</th>
+      <td>37.6</td>
+      <td>education (-14), nodegree (38), married (13), re74 (-10)</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>(ii) Reproduction</th>
+      <td>14.7</td>
+      <td>black (-11), u75 (-15)</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>(iii) SH</th>
+      <td>37.6</td>
+      <td>education (-14), nodegree (38), married (13), re74 (-10), u74 (11)</td>
+      <td>no</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p><strong>Reading the matching balance:</strong></p>
+<ul>
+<li><strong>No version is balanced</strong> for any group, including the
+paper’s own matched samples (computed from its Table 4 means).</li>
+<li><strong><code>nodegree</code> is the most frequent problem.</strong>
+It exceeds 10% for PSID-1 and CPS-1 in all three versions, and for CPS-3
+under Paper and SH (38%).</li>
+<li><strong>CPS-1 under Paper and SH:</strong> only
+<code>nodegree</code> (15% and 14%) and age (−12%) fail.</li>
+<li><strong>PSID-1:</strong> Hispanic fails in all three versions, and
+u74 in both reproductions. Reproduction also fails on black; Paper and
+SH also fail on education and married, and SH on u75.</li>
+<li><strong>CPS-3:</strong> Paper and SH fail on <code>nodegree</code>,
+education, married and RE74 (SH also on u74). Reproduction fails only on
+black and u75.</li>
+</ul>
+<h1 id="part-2.-covariate-balance-for-stratification">Part 2. Covariate
+balance for stratification</h1>
+<p>The Appendix test: within each stratum that has at least 2 treated
+and 2 comparison units, a two-sample t-test of each covariate’s mean,
+treated vs. comparison. A covariate <strong>fails</strong> in a stratum
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>t</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>&gt;</mo><mn>1.96</mn></mrow><annotation encoding="application/x-tex">|t|&gt;1.96</annotation></semantics></math>.</p>
+<ul>
+<li><strong>Strictly balanced:</strong> no test fails.</li>
+<li><strong>Chance level:</strong> with many tests, about 5% fail by
+chance even when every stratum is balanced. We report that benchmark
+next to the count.</li>
+</ul>
+<p>The paper publishes no strata, so only (ii) Reproduction and (iii) SH
+can be checked. No adjustment is made here; the goal is to see which
+covariates cause the problems.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> strata_table(info):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    s, rows <span class="op">=</span> info[<span class="st">&quot;s&quot;</span>], []</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> a, b <span class="kw">in</span> info[<span class="st">&quot;blocks&quot;</span>]:</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        blk <span class="op">=</span> in_block(s, a, b)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        n1, n0 <span class="op">=</span> <span class="bu">int</span>((blk.treat <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>()), <span class="bu">int</span>((blk.treat <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>())</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        tested <span class="op">=</span> n1 <span class="op">&gt;=</span> <span class="dv">2</span> <span class="kw">and</span> n0 <span class="op">&gt;=</span> <span class="dv">2</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        bad <span class="op">=</span> [v <span class="cf">for</span> v <span class="kw">in</span> BAL <span class="cf">if</span> tested <span class="kw">and</span> <span class="bu">abs</span>(t_stat(blk, v)) <span class="op">&gt;</span> <span class="fl">1.96</span>]</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        rows.append({<span class="st">&quot;score range&quot;</span>: <span class="ss">f&quot;[</span><span class="sc">{</span>a<span class="sc">:.3f}</span><span class="ss">, </span><span class="sc">{</span>b<span class="sc">:.3f}</span><span class="ss">)&quot;</span>, <span class="st">&quot;treated&quot;</span>: n1, <span class="st">&quot;comparison&quot;</span>: n0,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;tested&quot;</span>: <span class="st">&quot;yes&quot;</span> <span class="cf">if</span> tested <span class="cf">else</span> <span class="st">&quot;no (too few units)&quot;</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;failing covariates&quot;</span>: <span class="st">&quot;, &quot;</span>.join(<span class="ss">f&quot;</span><span class="sc">{</span>v<span class="sc">}</span><span class="ss"> (t=</span><span class="sc">{</span>t_stat(blk, v)<span class="sc">:.1f}</span><span class="ss">)&quot;</span> <span class="cf">for</span> v <span class="kw">in</span> bad) <span class="kw">or</span> <span class="st">&quot;-&quot;</span>})</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(rows)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> strata_counts(info):</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    s, per_var, tests, n_tested <span class="op">=</span> info[<span class="st">&quot;s&quot;</span>], {v: <span class="dv">0</span> <span class="cf">for</span> v <span class="kw">in</span> BAL}, <span class="dv">0</span>, <span class="dv">0</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> a, b <span class="kw">in</span> info[<span class="st">&quot;blocks&quot;</span>]:</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        blk <span class="op">=</span> in_block(s, a, b)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (blk.treat <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>() <span class="op">&lt;</span> <span class="dv">2</span> <span class="kw">or</span> (blk.treat <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>() <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>        n_tested <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> v <span class="kw">in</span> BAL:</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>            tests <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>            per_var[v] <span class="op">+=</span> <span class="bu">abs</span>(t_stat(blk, v)) <span class="op">&gt;</span> <span class="fl">1.96</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> per_var, tests, n_tested</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>sbal, overview <span class="op">=</span> {}, {}</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> g <span class="kw">in</span> GROUPS:</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> lab <span class="kw">in</span> SETUPS:</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>        info <span class="op">=</span> results[(g, lab)]</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>        per_var, tests, n_tested <span class="op">=</span> strata_counts(info)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>        sbal[(g, lab)] <span class="op">=</span> per_var</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>        f <span class="op">=</span> <span class="bu">sum</span>(per_var.values())</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>        overview[(g, lab)] <span class="op">=</span> {<span class="st">&quot;strata&quot;</span>: <span class="bu">len</span>(info[<span class="st">&quot;blocks&quot;</span>]), <span class="st">&quot;strata tested&quot;</span>: n_tested,</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;failing tests / tests&quot;</span>: <span class="ss">f&quot;</span><span class="sc">{</span>f<span class="sc">}</span><span class="ss"> / </span><span class="sc">{</span>tests<span class="sc">}</span><span class="ss">&quot;</span>,</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;expected by chance (5%)&quot;</span>: <span class="bu">round</span>(<span class="fl">0.05</span> <span class="op">*</span> tests, <span class="dv">1</span>),</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;result&quot;</span>: <span class="st">&quot;strictly balanced&quot;</span> <span class="cf">if</span> f <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>                                        (<span class="st">&quot;within chance level&quot;</span> <span class="cf">if</span> f <span class="op">&lt;=</span> <span class="fl">0.05</span> <span class="op">*</span> tests <span class="cf">else</span> <span class="st">&quot;NOT balanced&quot;</span>)}</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(overview).T</span></code></pre></div>
+<div class="table-wrap">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>strata</th>
+      <th>strata tested</th>
+      <th>failing tests / tests</th>
+      <th>expected by chance (5%)</th>
+      <th>result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">PSID-1</th>
+      <th>(ii) Reproduction</th>
+      <td>8</td>
+      <td>8</td>
+      <td>11 / 80</td>
+      <td>4.0</td>
+      <td>NOT balanced</td>
+    </tr>
+    <tr>
+      <th>(iii) SH</th>
+      <td>8</td>
+      <td>8</td>
+      <td>10 / 80</td>
+      <td>4.0</td>
+      <td>NOT balanced</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">CPS-1</th>
+      <th>(ii) Reproduction</th>
+      <td>18</td>
+      <td>18</td>
+      <td>27 / 180</td>
+      <td>9.0</td>
+      <td>NOT balanced</td>
+    </tr>
+    <tr>
+      <th>(iii) SH</th>
+      <td>9</td>
+      <td>9</td>
+      <td>8 / 90</td>
+      <td>4.5</td>
+      <td>NOT balanced</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">CPS-3</th>
+      <th>(ii) Reproduction</th>
+      <td>10</td>
+      <td>10</td>
+      <td>8 / 100</td>
+      <td>5.0</td>
+      <td>NOT balanced</td>
+    </tr>
+    <tr>
+      <th>(iii) SH</th>
+      <td>5</td>
+      <td>5</td>
+      <td>6 / 50</td>
+      <td>2.5</td>
+      <td>NOT balanced</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h3 id="which-covariates-cause-the-problems">Which covariates cause the
+problems</h3>
+<p>Number of strata in which each covariate fails the t-test (out of the
+strata tested):</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>problems <span class="op">=</span> pd.DataFrame(sbal).reindex(BAL).astype(<span class="bu">int</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>problems.loc[<span class="st">&quot;total&quot;</span>] <span class="op">=</span> problems.<span class="bu">sum</span>()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>problems</span></code></pre></div>
+<div class="table-wrap">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">PSID-1</th>
+      <th colspan="2" halign="left">CPS-1</th>
+      <th colspan="2" halign="left">CPS-3</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>(ii) Reproduction</th>
+      <th>(iii) SH</th>
+      <th>(ii) Reproduction</th>
+      <th>(iii) SH</th>
+      <th>(ii) Reproduction</th>
+      <th>(iii) SH</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>age</th>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>education</th>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>3</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>3</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>nodegree</th>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>married</th>
+      <td>2</td>
+      <td>1</td>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>re74</th>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>re75</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>u74</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>u75</th>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>total</th>
+      <td>11</td>
+      <td>10</td>
+      <td>27</td>
+      <td>8</td>
+      <td>8</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h3 id="stratum-by-stratum">Stratum by stratum</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> g <span class="kw">in</span> GROUPS:</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> lab <span class="kw">in</span> SETUPS:</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>g<span class="sc">}</span><span class="ss"> — </span><span class="sc">{</span>lab<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(strata_table(results[(g, lab)]).to_string(index<span class="op">=</span><span class="va">False</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre class="text"><code>PSID-1 — (ii) Reproduction
+   score range  treated  comparison tested                                                               failing covariates
+[0.001, 0.050)        7         918    yes black (t=3.5), hispanic (t=-6.8), married (t=12.7), u74 (t=-11.4), u75 (t=-13.2)
+[0.050, 0.100)        4         100    yes                                                                hispanic (t=-2.5)
+[0.100, 0.200)        7          53    yes                                                                    re74 (t=-3.5)
+[0.200, 0.400)       27          41    yes                                                                                -
+[0.400, 0.500)        5           8    yes                                                                   black (t=-2.4)
+[0.500, 0.600)       15           6    yes                                                                                -
+[0.600, 0.800)       22          13    yes                                                                                -
+[0.800, 1.000)       98           7    yes                                black (t=-2.3), hispanic (t=2.3), married (t=2.7) 
+
+PSID-1 — (iii) SH
+   score range  treated  comparison tested                                                               failing covariates
+[0.000, 0.050)        7         924    yes black (t=3.5), hispanic (t=-6.8), married (t=12.7), u74 (t=-11.2), u75 (t=-13.1)
+[0.050, 0.100)        4         102    yes                                                                hispanic (t=-2.5)
+[0.100, 0.200)        7          56    yes                                                                    re74 (t=-3.7)
+[0.200, 0.300)       10          25    yes                                                                                -
+[0.300, 0.400)       18          16    yes                                                                                -
+[0.400, 0.600)       21          14    yes                                                                   black (t=-2.4)
+[0.600, 0.950)       58          13    yes                                                       re74 (t=-2.5), u74 (t=3.7)
+[0.950, 1.000)       60           7    yes                                                                                - 
+
+CPS-1 — (ii) Reproduction
+   score range  treated  comparison tested                                                                            failing covariates
+[0.001, 0.026)       18        3221    yes                                                                                             -
+[0.026, 0.051)        8         242    yes                                                                                  age (t=-2.0)
+[0.051, 0.063)        3          64    yes                                  black (t=5.4), hispanic (t=-3.8), u74 (t=-4.8), u75 (t=-5.0)
+[0.063, 0.076)        4          44    yes hispanic (t=-2.6), married (t=-6.6), re74 (t=-6.3), re75 (t=-6.4), u74 (t=10.1), u75 (t=10.1)
+[0.076, 0.088)        4          35    yes                                             age (t=-3.5), hispanic (t=-2.4), married (t=-2.7)
+[0.088, 0.101)        3          21    yes                                                                                 black (t=2.5)
+[0.101, 0.125)        5          35    yes                                              nodegree (t=4.5), married (t=-2.9), u75 (t=-3.2)
+[0.125, 0.138)        3          11    yes                                         education (t=-2.3), nodegree (t=2.9), married (t=5.2)
+[0.138, 0.150)        3          16    yes                                                  nodegree (t=5.0), re74 (t=-2.3), u74 (t=3.4)
+[0.150, 0.200)        8          33    yes                                                                                             -
+[0.200, 0.225)        4          22    yes                                                          education (t=3.0), nodegree (t=-2.2)
+[0.225, 0.250)        3          12    yes                                                                                  age (t=-2.4)
+[0.250, 0.300)        6          20    yes                                                                                             -
+[0.300, 0.400)       19          32    yes                                                                                             -
+[0.400, 0.500)       16          14    yes                                                                                             -
+[0.500, 0.600)       22          17    yes                                                                                             -
+[0.600, 0.800)       20           9    yes                                                                                             -
+[0.800, 1.000)       36           8    yes                                                                                             - 
+
+CPS-1 — (iii) SH
+   score range  treated  comparison tested                                                   failing covariates
+[0.000, 0.025)       18        2738    yes                                                                    -
+[0.025, 0.050)        8         231    yes                                                         age (t=-2.2)
+[0.050, 0.100)       15         183    yes hispanic (t=-5.6), nodegree (t=2.1), married (t=-2.1), re74 (t=-3.6)
+[0.100, 0.200)       18          99    yes                                                   education (t=-2.1)
+[0.200, 0.400)       33          78    yes                                                    education (t=2.2)
+[0.400, 0.500)       19          24    yes                                                                    -
+[0.500, 0.600)       20           8    yes                                                          u75 (t=2.4)
+[0.600, 0.800)       20          13    yes                                                                    -
+[0.800, 1.000)       34           7    yes                                                                    - 
+
+CPS-3 — (ii) Reproduction
+   score range  treated  comparison tested                          failing covariates
+[0.019, 0.110)        9         194    yes               black (t=-2.7), re74 (t=-2.5)
+[0.110, 0.200)        4          38    yes                                           -
+[0.200, 0.250)        5           8    yes                           hispanic (t=-2.0)
+[0.250, 0.300)        5          16    yes                               re74 (t=-2.5)
+[0.300, 0.400)        6          16    yes                               black (t=2.6)
+[0.400, 0.600)       30          17    yes                                           -
+[0.600, 0.700)       21          11    yes                                           -
+[0.700, 0.800)       22          14    yes                                           -
+[0.800, 0.900)       35           3    yes married (t=4.2), re74 (t=2.0), u74 (t=-2.9)
+[0.900, 1.000)       48           4    yes                                           - 
+
+CPS-3 — (iii) SH
+   score range  treated  comparison tested               failing covariates
+[0.000, 0.200)       13         240    yes                education (t=2.2)
+[0.200, 0.400)       19          42    yes hispanic (t=-2.9), re74 (t=-2.9)
+[0.400, 0.600)       26          15    yes                                -
+[0.600, 0.800)       45          25    yes black (t=-2.3), hispanic (t=2.1)
+[0.800, 1.000)       82           8    yes                  married (t=3.7)</code></pre>
+<p><strong>Reading the stratification balance:</strong></p>
+<ul>
+<li><strong>No group is balanced under either version.</strong> Failing
+tests are about 1.6–3 times what chance alone would produce.</li>
+<li><strong>Covariates that fail most often:</strong> Hispanic, black,
+married and RE74, in every group. <code>nodegree</code>, age and u74/u75
+fail repeatedly under Reproduction for CPS-1. u74 and u75 also fail in
+PSID-1’s lowest stratum.</li>
+<li><strong>Where the failures concentrate:</strong>
+<ul>
+<li><em>The lowest-score strata,</em> where a few treated units face
+hundreds or thousands of comparison units. PSID-1’s first stratum (7
+treated vs. about 920 comparison units) fails on five covariates, and
+most CPS-1 failures are in strata below a score of 0.25.</li>
+<li><em>The highest-score strata,</em> where many treated units share a
+handful of comparison units. For example, PSID-1 above 0.6 under SH has
+118 treated vs. 20 comparison units, and CPS-3 above 0.8 has 83 treated
+vs. 7 comparison units under Reproduction.</li>
+</ul></li>
+<li><strong>Next step, if wanted:</strong> the Appendix’s remedy is to
+add interaction or higher-order terms for these covariates and
+re-estimate the score. That is not done here.</li>
+</ul>
+</body>
+</html>
